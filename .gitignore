@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Build outputs
+dist/
+build/
+*.log
+*.tgz
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.pem
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ralph
+.ralph/logs/
+
+# Testing
+coverage/
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# OS
+Thumbs.db
+.DS_Store
