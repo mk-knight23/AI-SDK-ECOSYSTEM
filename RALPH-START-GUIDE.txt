@@ -1,0 +1,104 @@
+# 🚀 Ralph Loop Quick Start Guide
+
+## WHAT IS RALPH LOOP?
+
+Ralph Loop is an autonomous AI developer that will build all 10 AI SDK SaaS products for you, running completely hands-off for 24-48 hours.
+
+## ⚠️ IMPORTANT: START FROM TERMINAL, NOT CLAUDE CODE!
+
+Ralph needs to create its own Claude Code sessions. You MUST run this from a standard terminal:
+
+1. Open Terminal.app (Cmd+Space, type "Terminal")
+2. Navigate: cd /Users/mkazi/AI-SDK-PROJECTS
+3. Run: ./start-ralph.sh
+
+## 📊 MONITOR RALPH'S PROGRESS
+
+In another terminal window:
+
+./check-ralph-progress.sh     # Quick status check
+cat .ralph/status.json | jq    # Detailed status
+tail -f .ralph/logs/ralph.log   # Live logs
+tmux attach -t ai-sdk-projects  # Attach to Ralph's session
+
+## 🎯 WHAT RALPH WILL BUILD (WEEK 1)
+
+Phase 1: Environment Setup (0-2 hours)
+- Install Doppler CLI
+- Create 10 Doppler projects
+- Configure all API keys
+- Install platform CLIs
+- Authenticate with all platforms
+
+Phase 2: Monorepo Bootstrap (2-4 hours)
+- Create git worktrees for all 10 projects
+- Set up tmux session with 10 windows
+- Create 10 GitHub repos
+- Initialize shared infrastructure
+
+Phase 3: Parallel Scaffolding (4-12 hours)
+- Scaffold all 10 projects simultaneously
+- Each project: frontend + backend + tests
+- True parallel development
+
+Phase 4: CI/CD Setup (12-16 hours)
+- GitHub Actions workflows
+- Branch protection rules
+- Deployment previews
+
+Phase 5: Deployments (16-20 hours)
+- Deploy 20 Hello World apps
+- Verify all deployments live
+
+Phase 6: Finalization (20-24 hours)
+- Create handoff documents
+- Write READMEs
+- Generate completion report
+
+## ⏱️ TIMELINE
+
+Estimated: 48 hours autonomous execution
+Check progress: ./check-ralph-progress.sh
+
+## 🛑 HOW TO STOP
+
+Press Ctrl+C (graceful shutdown)
+OR: pkill -f 'ralph --prompt'
+
+Ralph saves state and can be resumed!
+
+## 🔄 RESUME AFTER INTERRUPTION
+
+Just run ./start-ralph.sh again
+Ralph auto-resumes from where it left off
+
+## ✅ SUCCESS INDICATORS
+
+- status.json shows "status": "running"
+- ralph.log shows "Loop #X" messages
+- New files appear in projects/
+- Git commits being made
+
+Complete when:
+- All 10 projects deployed
+- .ralph/handoffs/week-1-complete.md exists
+- 20 Hello World apps are live
+
+## 🆘 TROUBLESHOOTING
+
+"tmux not installed": brew install tmux
+"Ralph not found": Install from https://github.com/frankbria/ralph-claude-code
+"API key errors": Ralph will pause, rotate key, Ralph auto-resumes
+"Network outage": Ralph pauses affected projects, continues with others
+
+## 🎬 READY TO START?
+
+Open Terminal and run:
+  cd /Users/mkazi/AI-SDK-PROJECTS
+  ./start-ralph.sh
+
+In another Terminal (monitor):
+  cd /Users/mkazi/AI-SDK-PROJECTS  
+  watch -n 10 ./check-ralph-progress.sh
+
+Let Ralph run autonomously for 48 hours!
