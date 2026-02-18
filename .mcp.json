@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "claude-teams": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/cs50victor/claude-code-teams-mcp@v0.1.1", "claude-teams"],
+      "env": {
+        "CLAUDE_TEAMS_BACKENDS": "claude"
+      }
+    }
+  }
+}
