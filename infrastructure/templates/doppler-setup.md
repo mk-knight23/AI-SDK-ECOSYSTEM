@@ -27,7 +27,14 @@ doppler login
 # Create project for each
 doppler projects create venture-graph
 doppler projects create omni-desk
-# ... etc
+doppler projects create dev-squad
+doppler projects create supply-consensus
+doppler projects create market-pulse
+doppler projects create insight-stream
+doppler projects create research-synthesis
+doppler projects create trend-factory
+doppler projects create patent-iq
+doppler projects create claude-forge
 
 # Setup environment
 cd projects/01-venture-graph
@@ -35,4 +42,40 @@ doppler setup
 
 # Add secrets
 doppler secrets set OPENAI_API_KEY=sk-your-key
+
+# Verify secrets are set
+doppler secrets --project venture-graph
+
+# Get specific secret
+doppler secrets get OPENAI_API_KEY --project venture-graph
 ```
+
+## Environment Configuration
+
+Create environments for each project:
+```bash
+doppler environments create dev --project venture-graph
+doppler environments create prod --project venture-graph
+```
+
+## Secret Rotation
+
+To rotate a compromised key:
+```bash
+doppler secrets set OPENAI_API_KEY=new-key --project venture-graph
+```
+
+## Local Development
+
+Export secrets to .env (ensure .env is gitignored):
+```bash
+doppler secrets download --format env --no-file > .env
+```
+
+## Security Best Practices
+
+- Enable 2FA on your Doppler account
+- Restrict production secrets to authorized team members only
+- Never commit actual API keys to version control
+- Rotate keys immediately if compromised
+- Use separate keys for dev/staging/prod environments
