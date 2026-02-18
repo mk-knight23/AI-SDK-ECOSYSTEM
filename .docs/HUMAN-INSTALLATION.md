@@ -35,6 +35,8 @@ Claude5* combines 5 major Claude Code ecosystems. This guide shows you how to in
 **Repository:** https://github.com/obra/superpowers
 **Stars:** 53.8k
 
+**📚 Learn More:** [Read the Superpowers Spotlight](../.claude/plans/ecosystems/superpowers-spotlight.md) - Discover Jesse (obra)'s philosophy: "Discipline + Automation = Great AI Development"
+
 ---
 
 ### Step 2: Install Everything Claude Code
@@ -52,6 +54,8 @@ Claude5* combines 5 major Claude Code ecosystems. This guide shows you how to in
 **Repository:** https://github.com/affaan-m/everything-claude-code
 **Stars:** 42k
 
+**📚 Learn More:** [Read the ECC Spotlight](../.claude/plans/ecosystems/ecc-spotlight.md) - Affaan Mustafa's hackathon journey: "10+ months of intensive daily use building real products"
+
 ---
 
 ### Step 3: Install UI UX Pro Max
@@ -68,6 +72,8 @@ git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git ~/.claude/
 
 **Repository:** https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
 **Stars:** 32.4k
+
+**📚 Learn More:** [Read the UI/UX Pro Max Spotlight](../.claude/plans/ecosystems/ui-ux-pro-max-spotlight.md) - nextlevelbuilder's vision: "Beautiful UI for everyone, not just designers"
 
 ---
 
@@ -92,6 +98,8 @@ curl -fsSL https://raw.githubusercontent.com/frankbria/ralph-claude-code/main/in
 **Repository:** https://github.com/frankbria/ralph-claude-code
 **Stars:** 7k
 
+**📚 Learn More:** [Read the Ralph Loop Spotlight](../.claude/plans/ecosystems/ralph-loop-spotlight.md) - Frank Bria's autonomous AI revolution: "I'm learning that 'good enough' is sometimes the right goal"
+
 ---
 
 ### Step 5: Install Claude Code Tips
@@ -108,6 +116,8 @@ curl -fsSL https://raw.githubusercontent.com/frankbria/ralph-claude-code/main/in
 
 **Repository:** https://github.com/ykdojo/claude-code-tips
 **Stars:** 2.9k
+
+**📚 Learn More:** [Read the Claude-Tips Spotlight](../.claude/plans/ecosystems/claude-tips-spotlight.md) - ykdojo's efficiency guide: "The best way to get better at using Claude Code is by using it"
 
 ---
 

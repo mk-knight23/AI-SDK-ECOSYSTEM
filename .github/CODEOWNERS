@@ -1,0 +1,74 @@
+# Codeowners File
+
+# This file defines who needs to approve pull requests based on which files are modified.
+
+# Lines are of the form:
+#   file-pattern approval-list1 @approval-list2
+#
+# Approval lists can contain:
+# - GitHub usernames (e.g., @mk-knight23)
+# - Email addresses (e.g., user@example.com)
+# - GitHub teams (e.g., @org/team-name)
+
+#------------------------------------------------------------------------------
+
+# Project Owner approves everything
+* @mk-knight23
+
+# Documentation changes need owner review
+*.md @mk-knight23
+.docs/** @mk-knight23
+
+# Core configuration changes
+.claude/** @mk-knight23
+
+# GitHub templates and workflows
+.github/** @mk-knight23
+
+# License changes
+LICENSE @mk-knight23
+
+#------------------------------------------------------------------------------
+
+# OPTIONAL: Add team-based rules if you have a team
+# Uncomment and modify as needed:
+
+# Code changes require code review
+# *.ts @code-reviewers
+# *.js @code-reviewers
+# *.py @python-experts
+
+# Documentation changes need technical writer approval
+# README.md @tech-writers
+# docs/** @tech-writers
+
+# Security changes need security review
+# *.secrets @security-team
+# security/** @security-team
+
+#------------------------------------------------------------------------------
+
+# NOTES:
+#
+# 1. File patterns use Git ignore syntax (see gitignore(5))
+#    Example: *.js matches all .js files
+#    Example: src/**/*.ts matches all .ts files in src/ directory tree
+#
+# 2. Patterns are matched in order from top to bottom
+#    First matching pattern determines the approvers
+#    More specific patterns should come first
+#
+# 3. If no pattern matches, no owner is assigned
+#    Default: No approval required
+#
+# 4. Wildcards:
+#    * matches any file
+#    ** matches any directory
+#    ? matches any single character
+#    [abc] matches any character inside brackets
+#
+# 5. Comments start with #
+#    Blank lines are ignored
+#
+# For more information, see:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings/about-code-owners

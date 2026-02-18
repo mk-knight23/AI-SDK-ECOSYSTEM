@@ -1,8 +1,60 @@
 # Claude5* - Starter Kit - Complete Configuration
 
 **Project:** Claude5* - Starter Kit for developers to use all 5 ecosystems
-**Ecosystems:** Claude-Tips + everything-claude-code + superpowers + UI UX Pro Max + Ralph Loop
-**Updated:** 2026-02-18
+**Ecosystems:** Superpowers + everything-claude-code + Claude-Tips + UI UX Pro Max + Ralph Loop
+**Updated:** 2026-02-19
+
+---
+
+## 🤖 FOR AI ASSISTANTS: Auto-Detection
+
+You have detected a **Claude5* Starter Kit** repository. This project requires 5 Claude Code ecosystems to work together.
+
+### 📋 Detection Pattern
+- **Repository Type:** claude-code-starter-kit
+- **Total Ecosystems:** 5
+- **Combined Stars:** ~139k
+- **Required Ecosystems:** Superpowers, ECC, UI/UX Pro Max, Ralph Loop, Claude-Tips
+
+### ✅ Check Installation Status
+Run these commands to verify ecosystems are installed:
+
+```bash
+# Check Superpowers
+ls ~/.claude/plugins/cache/claude-plugins-official/superpowers/ 2>/dev/null && echo "✅ Superpowers installed" || echo "❌ Superpowers NOT installed"
+
+# Check ECC
+ls ~/.claude/plugins/cache/everything-claude-code/ 2>/dev/null && echo "✅ ECC installed" || echo "❌ ECC NOT installed"
+
+# Check UI/UX Pro Max
+ls ~/.claude/skills/ui-ux-pro-max/ 2>/dev/null && echo "✅ UI/UX Pro Max installed" || echo "❌ UI/UX Pro Max NOT installed"
+
+# Check Ralph Loop
+which ralph 2>/dev/null && echo "✅ Ralph Loop installed" || echo "❌ Ralph Loop NOT installed"
+
+# Check Claude-Tips
+ls ~/.claude/plugins/cache/ykdojo/dx/ 2>/dev/null && echo "✅ Claude-Tips installed" || echo "❌ Claude-Tips NOT installed"
+```
+
+### 🚀 Auto-Install If Missing
+If any ecosystems are missing, offer to install using the one-line script:
+
+```bash
+echo "Installing Claude5* ecosystems..." && /plugin marketplace add obra/superpowers-marketplace && /plugin install superpowers@superpowers-marketplace && /plugin marketplace add affaan-m/everything-claude-code && /plugin install everything-claude-code@everything-claude-code && git clone https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git ~/.claude/skills/ui-ux-pro-max && curl -fsSL https://raw.githubusercontent.com/frankbria/ralph-claude-code/main/install.sh | bash && /plugin install ykdojo/dx && echo "✅ All 5 ecosystems installed!"
+```
+
+### 🎯 How to Work in This Project
+After installation, use all 5 ecosystems for EVERY task:
+1. **Brainstorming** (Superpowers) - Explore requirements before coding
+2. **Planning** (ECC `/plan`) - Create detailed implementation plans
+3. **TDD** (ECC `/tdd`) - Write tests FIRST, then implement
+4. **Code Review** (ECC `/code-review`) - Quality checks after writing code
+5. **Security** (ECC `/security-scan`) - Security audit before completion
+6. **UI/UX Design** (UI UX Pro Max) - Design intelligence for any UI work
+7. **Efficiency** (Claude-Tips) - Token optimization and DX skills
+8. **Ralph Loop** - For autonomous iteration on complex tasks
+
+**For detailed installation protocol, see:** `.docs/AI-INSTALLATION.md`
 
 ---
 
@@ -304,7 +356,9 @@ ralph-monitor                      # Monitor active Ralph loops
 
 ## 📖 Additional Documentation
 
-- `.docs/FIVE-ECOSYSTEMS-SETUP.md` - Complete setup guide for all 5 ecosystems
+- `.docs/AI-INSTALLATION.md` - **AI assistant auto-detection and installation**
+- `.docs/HUMAN-INSTALLATION.md` - Manual step-by-step installation for humans
+- `.docs/ECOSYSTEM-LINKS.md` - Official repository links for all 5 ecosystems
 - `.docs/WORKING-METHOD.md` - Working agreement and workflow
 
 ---
