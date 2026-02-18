@@ -4,14 +4,24 @@
 
 **The ultimate starter kit for developers** using all FIVE major Claude Code ecosystems in every project.
 
+<!-- Repository Status -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-2.1.44+-brightgreen)](https://docs.anthropic.com)
-[![5 Ecosystems](https://img.shields.io/badge/Ecosystems-5-blue)](#-ecosystems)
-[![139k+ Stars](https://img.shields.io/badge/Expertise-139k%2B%20stars-orange)](#-whats-configured)
+[![Maintenance](https://img.shields.io/badge/Maintenance-Active-success)](https://github.com/mk-knight23/claude5-starter-kit)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen)](CONTRIBUTING.md)
+
+<!-- 5 Ecosystems -->
+[![Superpowers](https://img.shields.io/badge/Superpowers-53.8k-blue)](https://github.com/obra/superpowers)
+[![ECC](https://img.shields.io/badge/ECC-42k-purple)](https://github.com/affaan-m/everything-claude-code)
+[![UI/UX Pro Max](https://img.shields.io/badge/UI%2FUX_Pro_Max-32.4k-pink)](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+[![Ralph Loop](https://img.shields.io/badge/Ralph_Loop-7k-red)](https://github.com/frankbria/ralph-claude-code)
+[![Claude-Tips](https://img.shields.io/badge/Claude--Tips-2.9k-orange)](https://github.com/ykdojo/claude-code-tips)
+
+**Combined: ~139k stars of expertise** 🏆
 
 **Complete Claude Code development environment powered by all FIVE major ecosystems**
 
-[Quick Start](#-quick-start) • [Setup Guide](#-setup) • [Documentation](#-documentation) • [Contributing](CONTRIBUTING.md)
+[Quick Start](#-quick-start) • [Setup Guide](#-setup) • [Documentation](#-documentation) • [Contributing](CONTRIBUTING.md) • [Report Issue](https://github.com/mk-knight23/claude5-starter-kit/issues)
 
 </div>
 
