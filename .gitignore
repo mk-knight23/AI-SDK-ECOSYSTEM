@@ -1,47 +1,27 @@
-# Dependencies
-node_modules/
-vendor/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+node_modules
 
-# Build outputs
-dist/
-build/
-*.log
-*.tgz
-
-# Environment files
-.env
-.env.local
-.env.*.local
-*.pem
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Ralph
-.ralph/
-
-# Testing
-coverage/
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Temporary files
-*.tmp
-*.temp
-.tmp/
-.temp/
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
 
 # OS
-Thumbs.db
 .DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Logs
+logs/
+*.log
