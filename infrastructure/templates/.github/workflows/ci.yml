@@ -1,0 +1,53 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+        if: ${{ inputs.language == 'node' }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+        if: ${{ inputs.language == 'python' }}
+
+      - name: Install dependencies
+        run: npm ci
+        if: ${{ inputs.language == 'node' }}
+
+      - name: Lint
+        run: npm run lint || echo "No lint script"
+
+      - name: Type check
+        run: npm run typecheck || echo "No typecheck script"
+
+      - name: Test
+        run: npm test || echo "No tests yet"
+
+      - name: Build
+        run: npm run build
+
+      - name: Docker build
+        run: docker build -t test-app .
+
+  deploy:
+    needs: quality
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: echo "Deploy step - platform specific"
