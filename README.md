@@ -56,9 +56,28 @@ projects/
 
 ---
 
-## Next: Week 2
+## Week 2: AI Integration Complete ✅
 
-Core AI logic implementation for all 10 projects.
+All 10 projects now have functional AI SDK integrations:
+
+| Project | AI Feature | SDK |
+|---------|-----------|-----|
+| VentureGraph | Venture planning workflow | LangGraph |
+| OmniDesk | Enterprise RAG | LangChain |
+| DevSquad | Code review & test gen | OpenAI SDK |
+| SupplyConsensus | Multi-agent supply chain | AutoGen |
+| MarketPulse | Competitor intel | Google ADK |
+| InsightStream | Streaming AI responses | Vercel AI SDK |
+| ResearchSynthesis | Knowledge graph | LlamaIndex |
+| TrendFactory | Marketing crew | CrewAI |
+| PatentIQ | Patent search | Haystack |
+| ClaudeForge | Coding agent | Claude SDK |
+
+### Test AI Integrations
+
+```bash
+./scripts/test-all-ai.sh
+```
 
 ## Creating a project
 
