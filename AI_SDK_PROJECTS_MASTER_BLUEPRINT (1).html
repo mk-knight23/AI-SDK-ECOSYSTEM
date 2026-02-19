@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI SDK Projects — Master Blueprint</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --surface: #16161f;
+    --border: #2a2a3a;
+    --accent: #ff4d6d;
+    --accent2: #7c3aed;
+    --accent3: #06b6d4;
+    --accent4: #f59e0b;
+    --accent5: #10b981;
+    --text: #e8e8f0;
+    --muted: #7070a0;
+    --card: #1a1a26;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background: radial-gradient(ellipse at 30% 20%, #1a0a2e 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, #0a1a2e 0%, transparent 60%),
+                var(--bg);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(124,58,237,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    background: rgba(255,77,109,0.05);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 span.gradient {
+    background: linear-gradient(135deg, #ff4d6d, #7c3aed, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent3);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+  }
+
+  .section-intro {
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 4rem;
+    font-size: 0.95rem;
+  }
+
+  /* SECURITY ALERT */
+  .security-alert {
+    background: linear-gradient(135deg, rgba(255,77,109,0.1), rgba(255,77,109,0.05));
+    border: 1px solid rgba(255,77,109,0.4);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .security-alert h3 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .security-alert p { color: #ffb3c1; font-size: 0.85rem; margin-bottom: 0.5rem; }
+
+  /* PROJECT GRID */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .project-card {
+    background: var(--card);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card:hover { background: #1e1e2e; }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .p1::before { background: linear-gradient(90deg, #ff4d6d, #ff9a9e); }
+  .p2::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+  .p3::before { background: linear-gradient(90deg, #06b6d4, #67e8f9); }
+  .p4::before { background: linear-gradient(90deg, #f59e0b, #fde68a); }
+  .p5::before { background: linear-gradient(90deg, #10b981, #6ee7b7); }
+  .p6::before { background: linear-gradient(90deg, #ec4899, #f9a8d4); }
+  .p7::before { background: linear-gradient(90deg, #8b5cf6, #c4b5fd); }
+  .p8::before { background: linear-gradient(90deg, #f97316, #fed7aa); }
+  .p9::before { background: linear-gradient(90deg, #14b8a6, #99f6e4); }
+  .p10::before { background: linear-gradient(90deg, #6366f1, #a5b4fc); }
+
+  .project-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    opacity: 0.08;
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+
+  .project-sdk {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-tagline {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  .project-apis {
+    font-size: 0.72rem;
+    color: var(--accent3);
+  }
+
+  .project-apis span { color: var(--muted); }
+
+  /* COMMAND TABLES */
+  .cmd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .cmd-table th {
+    text-align: left;
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cmd-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .cmd-table tr:hover td { background: var(--surface); }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    color: var(--accent3);
+  }
+
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  pre .comment { color: #4a4a6a; }
+  pre .key { color: var(--accent3); }
+  pre .val { color: var(--accent5); }
+  pre .cmd { color: var(--accent4); }
+
+  /* WORKFLOW PHASES */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .phase {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .phase-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    opacity: 0.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .phase ul { list-style: none; }
+  .phase ul li { font-size: 0.78rem; color: var(--muted); padding: 3px 0; }
+  .phase ul li::before { content: '→ '; color: var(--accent3); }
+
+  /* PROVIDER GRID */
+  .providers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .provider {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 0.78rem;
+  }
+
+  .provider-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .provider-type {
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .provider-env { color: var(--accent4); font-size: 0.7rem; }
+
+  /* DEPLOYMENT GRID */
+  .deploy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .deploy-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .deploy-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .deploy-card .name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; }
+  .deploy-card .detail { font-size: 0.65rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* CONTENT GUIDE */
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .guide-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .guide-card .guide-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .guide-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .guide-steps { list-style: none; }
+  .guide-steps li { font-size: 0.78rem; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .guide-steps li:last-child { border: none; }
+  .guide-steps li strong { color: var(--text); }
+
+  /* OFFLINE RESILIENCE */
+  .resilience-box {
+    background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(6,182,212,0.05));
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 16px;
+    padding: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .resilience-box h3 { color: var(--accent5); margin-bottom: 1rem; font-size: 1.3rem; }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .toc a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--accent3); }
+  .toc a::before { content: '§'; color: var(--border); }
+
+  /* DIVIDER */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer .big { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; opacity: 0.1; }
+
+  /* HIGHLIGHT BOXES */
+  .highlight {
+    background: rgba(124,58,237,0.08);
+    border-left: 3px solid var(--accent2);
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+    font-size: 0.83rem;
+  }
+
+  .info {
+    background: rgba(6,182,212,0.08);
+    border-left: 3px solid var(--accent3);
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+    font-size: 0.83rem;
+    color: #67e8f9;
+  }
+
+  /* AGENT ORCHESTRATION */
+  .agent-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    font-size: 0.75rem;
+    overflow-x: auto;
+    white-space: pre;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent3);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<div class="hero">
+  <div class="badge">🚀 AI SDK Projects — Master Blueprint v1.0</div>
+  <h1>Build <span class="gradient">10 SaaS<br>Products</span><br>Simultaneously</h1>
+  <p class="hero-sub">Complete parallel agent orchestration strategy for the world's most ambitious AI SDK portfolio</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">SaaS Products</div></div>
+    <div class="stat"><div class="stat-num">25+</div><div class="stat-label">API Providers</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">Deploy Targets</div></div>
+    <div class="stat"><div class="stat-num">132k</div><div class="stat-label">⭐ Ecosystems</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SECTION: SECURITY ═══════════════════════════ -->
+<section id="security">
+  <div class="section-label">⚠️ Critical First Step</div>
+  <h2>Rotate All Keys Now</h2>
+  <div class="security-alert">
+    <h3>🔴 Your API Keys Were Exposed in This Conversation</h3>
+    <p>The .env file you pasted contains live credentials for Anthropic, OpenAI, AWS, GitHub, Stripe, Firebase, and 20+ other services. These are now in a chat log. Rotate them immediately.</p>
+    <p><strong>Rotation order (by blast radius):</strong> AWS → GitHub → Stripe → Anthropic → OpenAI → Firebase → all others.</p>
+    <p><strong>Going forward:</strong> Use <code>dopplerhq/doppler</code> or AWS Secrets Manager. Never paste .env into any interface.</p>
+  </div>
+
+  <h3 style="margin-bottom:1rem;font-family:'Syne',sans-serif;">Secret Management Setup (Do This First)</h3>
+  <pre>
+<span class="comment"># Install Doppler CLI (recommended for this project)</span>
+<span class="cmd">brew install dopplerhq/cli/doppler</span>
+<span class="cmd">doppler login</span>
+<span class="cmd">doppler setup</span>
+
+<span class="comment"># Create one project per SDK product in Doppler</span>
+<span class="cmd">doppler projects create venture-graph</span>
+<span class="cmd">doppler projects create omni-desk</span>
+<span class="comment"># ... repeat for all 10</span>
+
+<span class="comment"># Run Claude Code with secrets injected (no .env files ever)</span>
+<span class="cmd">doppler run -- claude</span>
+  </pre>
+</section>
+
+<!-- ═══════════════════════════ TOC ═══════════════════════════ -->
+<section id="toc">
+  <div class="section-label">Navigation</div>
+  <h2>Table of Contents</h2>
+  <div class="toc">
+    <a href="#security">Security & Key Management</a>
+    <a href="#architecture">Project Architecture</a>
+    <a href="#projects">All 10 Projects</a>
+    <a href="#parallel">Parallel Agent Strategy</a>
+    <a href="#providers">API Providers Map</a>
+    <a href="#deployment">Deployment Matrix</a>
+    <a href="#offline">Offline Resilience</a>
+    <a href="#cicd">CI/CD & DevOps</a>
+    <a href="#content">Content Creation Guides</a>
+    <a href="#social">Social Media Launch</a>
+    <a href="#commands">Master Command Reference</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ARCHITECTURE ═══════════════════════════ -->
+<section id="architecture">
+  <div class="section-label">01 — Foundation</div>
+  <h2>Project Architecture</h2>
+  <p class="section-intro">The monorepo structure that houses all 10 SaaS products, shared infrastructure, documentation, and content creation pipelines.</p>
+
+  <pre>
+<span class="comment">AI-SDK-PROJECTS/                          ← Root monorepo</span>
+├── <span class="key">.claude/</span>
+│   ├── CLAUDE.md                          ← All 4 ecosystems activated
+│   └── WORKING-METHOD.md
+├── <span class="key">projects/</span>
+│   ├── <span class="val">01-venture-graph/</span>              ← LangGraph (Next.js + Python)
+│   ├── <span class="val">02-omni-desk/</span>                  ← LangChain (React + FastAPI)
+│   ├── <span class="val">03-dev-squad/</span>                  ← OpenAI SDK (SvelteKit + Node)
+│   ├── <span class="val">04-supply-consensus/</span>           ← AutoGen (Vue + .NET gRPC)
+│   ├── <span class="val">05-market-pulse/</span>               ← Google ADK (Angular + Go)
+│   ├── <span class="val">06-insight-stream/</span>             ← Vercel AI SDK (Next.js RSC)
+│   ├── <span class="val">07-research-synthesis/</span>         ← LlamaIndex (Remix + Python)
+│   ├── <span class="val">08-trend-factory/</span>              ← CrewAI (Nuxt + Django)
+│   ├── <span class="val">09-patent-iq/</span>                  ← Haystack (Astro + Flask)
+│   └── <span class="val">10-claude-forge/</span>               ← Claude SDK (T3 + Python)
+├── <span class="key">shared/</span>
+│   ├── ui-components/                     ← Shared design system
+│   ├── auth/                              ← Shared auth (Clerk/Auth0)
+│   ├── payments/                          ← Shared Stripe integration
+│   └── monitoring/                        ← PostHog + Sentry shared
+├── <span class="key">infrastructure/</span>
+│   ├── terraform/                         ← IaC for all deployments
+│   ├── docker-compose.yml
+│   ├── .github/workflows/                 ← CI/CD for all 10 projects
+│   └── k8s/                               ← Kubernetes configs
+├── <span class="key">docs/</span>
+│   ├── master-guide/                      ← This document
+│   ├── per-project/                       ← Individual project docs
+│   └── api-reference/                     ← Auto-generated API docs
+├── <span class="key">content/</span>
+│   ├── pdf-templates/                     ← PDF export templates
+│   ├── ppt-templates/                     ← Presentation templates
+│   ├── youtube-scripts/                   ← Video scripts per project
+│   └── social/                            ← LinkedIn/Reddit/X posts
+└── <span class="key">scripts/</span>
+    ├── bootstrap.sh                       ← Clone + setup all 10 repos
+    ├── parallel-build.sh                  ← Build all simultaneously
+    └── deploy-all.sh                      ← Deploy everything
+  </pre>
+</section>
+
+<!-- ═══════════════════════════ 10 PROJECTS ═══════════════════════════ -->
+<section id="projects">
+  <div class="section-label">02 — The Products</div>
+  <h2>All 10 Projects</h2>
+  <p class="section-intro">Each product is production-grade SaaS with unique tech stack, unique AI SDK showcase, landing page, docs, and full deployment pipeline.</p>
+
+  <div class="projects-grid">
+
+    <!-- P1: VentureGraph -->
+    <div class="project-card p1">
+      <div class="project-num">01</div>
+      <div class="project-sdk" style="background:rgba(255,77,109,0.1);color:#ff4d6d;">LangGraph</div>
+      <div class="project-name">VentureGraph</div>
+      <div class="project-tagline">Stateful multi-agent venture planning with cyclic graph topology</div>
+      <div class="tech-tags">
+        <span class="tag">Next.js 15</span>
+        <span class="tag">Python 3.12</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Redis</span>
+        <span class="tag">LangGraph</span>
+        <span class="tag">LangSmith</span>
+        <span class="tag">Tailwind v4</span>
+        <span class="tag">shadcn/ui</span>
+        <span class="tag">Stripe</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>OpenAI, Anthropic, OpenRouter, Perplexity, XAI/Grok</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Railway + Vercel | Auth: Auth0</div>
+    </div>
+
+    <!-- P2: OmniDesk -->
+    <div class="project-card p2">
+      <div class="project-num">02</div>
+      <div class="project-sdk" style="background:rgba(124,58,237,0.1);color:#a78bfa;">LangChain</div>
+      <div class="project-name">OmniDesk</div>
+      <div class="project-tagline">Enterprise RAG connecting 500+ integrations with LCEL pipelines</div>
+      <div class="tech-tags">
+        <span class="tag">React 19</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Qdrant</span>
+        <span class="tag">Celery</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">LCEL</span>
+        <span class="tag">Pinecone</span>
+        <span class="tag">MUI v6</span>
+        <span class="tag">Postgres</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>Google Gemini, Mistral, DeepSeek, HuggingFace, Chutes AI</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Render + Netlify | Auth: Firebase</div>
+    </div>
+
+    <!-- P3: DevSquad -->
+    <div class="project-card p3">
+      <div class="project-num">03</div>
+      <div class="project-sdk" style="background:rgba(6,182,212,0.1);color:#06b6d4;">OpenAI SDK</div>
+      <div class="project-name">DevSquad</div>
+      <div class="project-tagline">AI software team: Planner → Coder → QA with native handoffs</div>
+      <div class="tech-tags">
+        <span class="tag">SvelteKit</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Bun</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">OpenAI SDK</span>
+        <span class="tag">WebSockets</span>
+        <span class="tag">Skeleton UI</span>
+        <span class="tag">GitHub API</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>OpenAI, Anthropic (fallback), Groq (speed), AgentRouter, MegaLLM</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Fly.io + Cloudflare Pages | Auth: GitHub OAuth</div>
+    </div>
+
+    <!-- P4: SupplyConsensus -->
+    <div class="project-card p4">
+      <div class="project-num">04</div>
+      <div class="project-sdk" style="background:rgba(245,158,11,0.1);color:#f59e0b;">AutoGen</div>
+      <div class="project-name">SupplyConsensus</div>
+      <div class="project-tagline">Distributed supply chain agents on separate cloud providers via gRPC</div>
+      <div class="tech-tags">
+        <span class="tag">Vue 3</span>
+        <span class="tag">.NET 9</span>
+        <span class="tag">gRPC</span>
+        <span class="tag">AutoGen 0.4</span>
+        <span class="tag">Azure</span>
+        <span class="tag">Pinia</span>
+        <span class="tag">RabbitMQ</span>
+        <span class="tag">Terraform</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>Azure OpenAI, MiniMax, Moonshot/Kimi, NVIDIA NIM, Cerebras</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Azure Container Apps | Auth: Entra ID</div>
+    </div>
+
+    <!-- P5: MarketPulse -->
+    <div class="project-card p5">
+      <div class="project-num">05</div>
+      <div class="project-sdk" style="background:rgba(16,185,129,0.1);color:#10b981;">Google ADK</div>
+      <div class="project-name">MarketPulse</div>
+      <div class="project-tagline">Competitor intelligence with Vertex AI Search Grounding + live citations</div>
+      <div class="tech-tags">
+        <span class="tag">Angular 19</span>
+        <span class="tag">Go Fiber</span>
+        <span class="tag">Google ADK</span>
+        <span class="tag">Vertex AI</span>
+        <span class="tag">BigQuery</span>
+        <span class="tag">Cloud Run</span>
+        <span class="tag">Angular Material</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>Google Gemini, Vertex AI, Brave Search, Exa, SerpAPI, Tavily, WorldNews</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Google Cloud Run | Auth: Google OAuth</div>
+    </div>
+
+    <!-- P6: InsightStream -->
+    <div class="project-card p6">
+      <div class="project-num">06</div>
+      <div class="project-sdk" style="background:rgba(236,72,153,0.1);color:#ec4899;">Vercel AI SDK</div>
+      <div class="project-name">InsightStream</div>
+      <div class="project-tagline">Streaming generative UI: AI renders live React charts, not JSON</div>
+      <div class="tech-tags">
+        <span class="tag">Next.js 15 RSC</span>
+        <span class="tag">Vercel AI SDK</span>
+        <span class="tag">Recharts</span>
+        <span class="tag">Drizzle ORM</span>
+        <span class="tag">Neon DB</span>
+        <span class="tag">Radix UI</span>
+        <span class="tag">Framer Motion</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>Anthropic, OpenAI, Google Gemini, all via Vercel AI Gateway</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Vercel (native) | Auth: NextAuth v5</div>
+    </div>
+
+    <!-- P7: ResearchSynthesis -->
+    <div class="project-card p7">
+      <div class="project-num">07</div>
+      <div class="project-sdk" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">LlamaIndex</div>
+      <div class="project-name">ResearchSynthesis</div>
+      <div class="project-tagline">Knowledge graph RAG: SubQuestion decomposition across 10k papers</div>
+      <div class="tech-tags">
+        <span class="tag">Remix</span>
+        <span class="tag">Python</span>
+        <span class="tag">LlamaIndex</span>
+        <span class="tag">Neo4j</span>
+        <span class="tag">Weaviate</span>
+        <span class="tag">Chakra UI</span>
+        <span class="tag">GraphQL</span>
+        <span class="tag">arXiv API</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>HuggingFace, Mistral, Sarvam AI, Chutes AI (free tier), Anannas AI</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Fly.io + Railway | Auth: Magic Link</div>
+    </div>
+
+    <!-- P8: TrendFactory -->
+    <div class="project-card p8">
+      <div class="project-num">08</div>
+      <div class="project-sdk" style="background:rgba(249,115,22,0.1);color:#f97316;">CrewAI</div>
+      <div class="project-name">TrendFactory</div>
+      <div class="project-tagline">Marketing content crew: Researcher → Writer → Designer → Publisher</div>
+      <div class="tech-tags">
+        <span class="tag">Nuxt 3</span>
+        <span class="tag">Django</span>
+        <span class="tag">CrewAI</span>
+        <span class="tag">Celery Beat</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Minio</span>
+        <span class="tag">Naive UI</span>
+        <span class="tag">Ayrshare</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>XAI/Grok, DeepSeek, Moonshot, Serper, TMDB, WorldNews, Ayrshare</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Render + Netlify | Auth: Django Allauth</div>
+    </div>
+
+    <!-- P9: PatentIQ -->
+    <div class="project-card p9">
+      <div class="project-num">09</div>
+      <div class="project-sdk" style="background:rgba(20,184,166,0.1);color:#14b8a6;">Haystack</div>
+      <div class="project-name">PatentIQ</div>
+      <div class="project-tagline">Industrial patent search: extractive QA, hybrid BM25+DPR retrieval</div>
+      <div class="tech-tags">
+        <span class="tag">Astro 5</span>
+        <span class="tag">Flask</span>
+        <span class="tag">Haystack 2.0</span>
+        <span class="tag">Elasticsearch</span>
+        <span class="tag">React Islands</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">Docker</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>Mistral (embeddings), Deepgram (audio input), iLovePDF, ConvertAPI</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: AWS ECS | Auth: JWT</div>
+    </div>
+
+    <!-- P10: ClaudeForge -->
+    <div class="project-card p10">
+      <div class="project-num">10</div>
+      <div class="project-sdk" style="background:rgba(99,102,241,0.1);color:#6366f1;">Claude SDK</div>
+      <div class="project-name">ClaudeForge</div>
+      <div class="project-tagline">Autonomous coding agent: extended thinking + Computer Use + 200K context</div>
+      <div class="tech-tags">
+        <span class="tag">T3 Stack</span>
+        <span class="tag">Python</span>
+        <span class="tag">Anthropic SDK</span>
+        <span class="tag">tRPC</span>
+        <span class="tag">Prisma</span>
+        <span class="tag">Liveblocks</span>
+        <span class="tag">XTerm.js</span>
+        <span class="tag">Docker</span>
+      </div>
+      <div class="project-apis"><span>APIs: </span>Anthropic (primary), OpenRouter (fallback), AgentRouter, Cloudinary, GitHub</div>
+      <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--muted);">Deploy: Fly.io + Vercel | Auth: NextAuth</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PARALLEL AGENTS ═══════════════════════════ -->
+<section id="parallel">
+  <div class="section-label">03 — Orchestration</div>
+  <h2>Parallel Agent Strategy</h2>
+  <p class="section-intro">Run 10 Claude Code agents simultaneously using git worktrees. Each agent is isolated, has its own terminal session, and operates independently.</p>
+
+  <div class="agent-diagram">
+ORCHESTRATOR (you + master terminal)
+    │
+    ├─── AGENT-01 [venture-graph]   tmux window 1  → railway deploy
+    ├─── AGENT-02 [omni-desk]       tmux window 2  → render deploy
+    ├─── AGENT-03 [dev-squad]       tmux window 3  → fly deploy
+    ├─── AGENT-04 [supply-consensus] tmux window 4  → azure deploy
+    ├─── AGENT-05 [market-pulse]    tmux window 5  → cloud run deploy
+    ├─── AGENT-06 [insight-stream]  tmux window 6  → vercel deploy
+    ├─── AGENT-07 [research-synthesis] tmux window 7 → fly deploy
+    ├─── AGENT-08 [trend-factory]   tmux window 8  → render deploy
+    ├─── AGENT-09 [patent-iq]       tmux window 9  → aws ecs deploy
+    └─── AGENT-10 [claude-forge]    tmux window 10 → vercel deploy
+  </div>
+
+  <h3 style="margin-bottom:1rem;font-family:'Syne',sans-serif;">Bootstrap All 10 in One Command</h3>
+  <pre>
+<span class="comment">#!/bin/bash — scripts/bootstrap.sh</span>
+<span class="comment"># Run this once to create all worktrees and start all agents</span>
+
+PROJECTS=("venture-graph" "omni-desk" "dev-squad" "supply-consensus" 
+          "market-pulse" "insight-stream" "research-synthesis" 
+          "trend-factory" "patent-iq" "claude-forge")
+
+<span class="cmd">tmux new-session -d -s ai-sdk-projects -n orchestrator</span>
+
+for i in "${!PROJECTS[@]}"; do
+  PROJECT="${PROJECTS[$i]}"
+  WINDOW=$((i + 1))
+  
+  <span class="comment"># Create git worktree for isolation</span>
+  <span class="cmd">git worktree add projects/$PROJECT -b feat/$PROJECT</span>
+  
+  <span class="comment"># Open new tmux window for each agent</span>
+  <span class="cmd">tmux new-window -t ai-sdk-projects:$WINDOW -n $PROJECT</span>
+  <span class="cmd">tmux send-keys -t ai-sdk-projects:$WINDOW "cd projects/$PROJECT && doppler run -- claude" Enter</span>
+done
+
+<span class="cmd">tmux attach -t ai-sdk-projects</span>
+<span class="comment"># Switch between agents: Ctrl+B then window number (1-10)</span>
+  </pre>
+
+  <h3 style="margin-bottom:1rem;font-family:'Syne',sans-serif;">Per-Agent CLAUDE.md (drops into each project)</h3>
+  <pre>
+<span class="comment"># projects/venture-graph/.claude/CLAUDE.md</span>
+
+<span class="key">Project:</span> <span class="val">VentureGraph (LangGraph SaaS)</span>
+<span class="key">SDK Focus:</span> LangGraph stateful cyclic agent graphs
+<span class="key">Tech Stack:</span> Next.js 15 + FastAPI + PostgreSQL + Redis
+
+<span class="key">MANDATORY WORKFLOW:</span>
+1. Superpowers → Brainstorm → Plan → TDD
+2. ECC → /plan → /tdd → /code-review → /security-scan
+3. UI/UX Pro Max → Apply glassmorphism dark theme
+4. ykdojo → /dx:handoff before end of session
+
+<span class="key">AGENTS TO USE:</span>
+- /architect for LangGraph graph topology design
+- /tdd-guide for test-first on all agent logic
+- /security-reviewer before any API key usage
+
+<span class="key">CURRENT SPRINT:</span>
+- [ ] Scaffold Next.js + FastAPI
+- [ ] Implement LangGraph venture planning graph
+- [ ] Build stateful checkpoint system
+- [ ] Human-in-the-loop approval gates
+- [ ] Landing page with pricing
+- [ ] Stripe checkout integration
+- [ ] Deploy Railway + Vercel
+- [ ] GitHub Actions CI/CD
+- [ ] README + Developer Guide
+- [ ] User documentation
+  </pre>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-num">W1</div>
+      <h4>Week 1 — Scaffold All 10</h4>
+      <ul>
+        <li>Run bootstrap.sh</li>
+        <li>Create all GitHub repos</li>
+        <li>Set up Doppler secrets per project</li>
+        <li>Scaffold each project's structure</li>
+        <li>Set up CI/CD pipelines</li>
+        <li>Deploy "Hello World" to each platform</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-num">W2</div>
+      <h4>Week 2 — Core AI Logic</h4>
+      <ul>
+        <li>Implement core SDK-specific features</li>
+        <li>Build agent graphs/chains/crews</li>
+        <li>Connect primary API providers</li>
+        <li>TDD on all agent logic</li>
+        <li>Basic UI with design system</li>
+        <li>WebSocket/streaming setup</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-num">W3</div>
+      <h4>Week 3 — SaaS Features</h4>
+      <ul>
+        <li>Auth implementation per project</li>
+        <li>Stripe billing integration</li>
+        <li>Usage limits & rate limiting</li>
+        <li>User dashboards</li>
+        <li>API key management for users</li>
+        <li>Email (Resend) integration</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-num">W4</div>
+      <h4>Week 4 — Polish & Launch</h4>
+      <ul>
+        <li>Landing pages for all 10</li>
+        <li>Documentation sites</li>
+        <li>E2E tests on critical paths</li>
+        <li>Security audit per project</li>
+        <li>Performance optimization</li>
+        <li>Production deployments</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-num">W5</div>
+      <h4>Week 5 — Content Creation</h4>
+      <ul>
+        <li>PDF portfolio documents</li>
+        <li>PowerPoint presentations</li>
+        <li>YouTube video scripts</li>
+        <li>Demo recordings (Loom)</li>
+        <li>LinkedIn articles drafted</li>
+        <li>Reddit posts prepared</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-num">W6</div>
+      <h4>Week 6 — Launch Week</h4>
+      <ul>
+        <li>Simultaneous GitHub publish</li>
+        <li>ProductHunt launch day</li>
+        <li>LinkedIn article blast</li>
+        <li>Reddit r/MachineLearning post</li>
+        <li>X.com thread (all 10 projects)</li>
+        <li>YouTube video publish</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PROVIDERS ═══════════════════════════ -->
+<section id="providers">
+  <div class="section-label">04 — API Ecosystem</div>
+  <h2>Provider Distribution Map</h2>
+  <p class="section-intro">All 25+ API providers distributed across projects. No single project uses all providers — each has a primary + fallback configuration.</p>
+
+  <div class="providers-grid">
+    <div class="provider">
+      <div class="provider-name">Anthropic Claude</div>
+      <div class="provider-type">Primary LLM</div>
+      <div class="provider-env">ANTHROPIC_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: VentureGraph (fallback), ClaudeForge (primary), InsightStream</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">OpenAI</div>
+      <div class="provider-type">Primary LLM</div>
+      <div class="provider-env">OPENAI_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: DevSquad (primary), VentureGraph</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">OpenRouter</div>
+      <div class="provider-type">Multi-model Router</div>
+      <div class="provider-env">OPENROUTER_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">All projects as intelligent fallback router</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Google Gemini</div>
+      <div class="provider-type">Primary LLM + Vision</div>
+      <div class="provider-env">GEMINI_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: MarketPulse (primary), OmniDesk</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">XAI / Grok</div>
+      <div class="provider-type">Real-time LLM</div>
+      <div class="provider-env">XAI_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: TrendFactory (social media context)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">DeepSeek</div>
+      <div class="provider-type">Code LLM</div>
+      <div class="provider-env">DEEPSEEK_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: DevSquad (code review), ResearchSynthesis</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Mistral AI</div>
+      <div class="provider-type">EU-based LLM</div>
+      <div class="provider-env">MISTRAL_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: PatentIQ (embeddings), OmniDesk</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">MiniMax</div>
+      <div class="provider-type">Chinese LLM</div>
+      <div class="provider-env">MINIMAX_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: SupplyConsensus (international agents)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Moonshot / Kimi</div>
+      <div class="provider-type">Chinese LLM</div>
+      <div class="provider-env">MOONSHOT_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: TrendFactory (Asian market trends)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Cerebras</div>
+      <div class="provider-type">Ultra-fast Inference</div>
+      <div class="provider-env">CEREBRAS_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: DevSquad (speed), InsightStream</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">HuggingFace</div>
+      <div class="provider-type">Open Source Models</div>
+      <div class="provider-env">HUGGINGFACE_TOKEN</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: ResearchSynthesis, PatentIQ (embeddings)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Perplexity</div>
+      <div class="provider-type">Search LLM</div>
+      <div class="provider-env">PERPLEXITY_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: VentureGraph (market research)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">AgentRouter</div>
+      <div class="provider-type">Specialized Router</div>
+      <div class="provider-env">AGENT_ROUTER_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: ClaudeForge, DevSquad</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Chutes AI</div>
+      <div class="provider-type">Free Tier Models</div>
+      <div class="provider-env">CHUTES_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Dev/testing across all projects</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Anannas AI</div>
+      <div class="provider-type">Alternative Provider</div>
+      <div class="provider-env">ANANNAS_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: ResearchSynthesis backup</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">MegaLLM</div>
+      <div class="provider-type">Large Context</div>
+      <div class="provider-env">MEGALLM_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: PatentIQ (large docs)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Deepgram</div>
+      <div class="provider-type">Speech-to-Text</div>
+      <div class="provider-env">DEEPGRAM_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: PatentIQ, ClaudeForge (voice input)</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Tavily / Exa</div>
+      <div class="provider-type">AI Search</div>
+      <div class="provider-env">TAVILY_API_KEY / EXA_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: MarketPulse, VentureGraph, TrendFactory</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Serper / SerpAPI</div>
+      <div class="provider-type">Google Search API</div>
+      <div class="provider-env">SERPER_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: TrendFactory, MarketPulse</div>
+    </div>
+    <div class="provider">
+      <div class="provider-name">Sarvam AI</div>
+      <div class="provider-type">Indian Language AI</div>
+      <div class="provider-env">SARVAM_API_KEY</div>
+      <div style="margin-top:0.5rem;font-size:0.7rem;color:var(--muted);">Projects: ResearchSynthesis (multilingual)</div>
+    </div>
+  </div>
+
+  <div class="info">
+    <strong>Chinese AI Platforms:</strong> Kimi (kimi.com), MiniMax (agent.minimax.io), Qwen (chat.qwen.ai), ERNIE (ernie.baidu.com), Z.ai — integrated into SupplyConsensus and TrendFactory as international market intelligence sources. Use their APIs where available, web scraping (via Apify) as fallback.
+  </div>
+</section>
+
+<!-- ═══════════════════════════ DEPLOYMENT ═══════════════════════════ -->
+<section id="deployment">
+  <div class="section-label">05 — Infrastructure</div>
+  <h2>Deployment Matrix</h2>
+  <p class="section-intro">Each project deploys to a different hosting platform — demonstrating full DevOps breadth for the portfolio.</p>
+
+  <div class="deploy-grid">
+    <div class="deploy-card"><div class="icon">🚄</div><div class="name">Railway</div><div class="detail">VentureGraph backend</div></div>
+    <div class="deploy-card"><div class="icon">▲</div><div class="name">Vercel</div><div class="detail">InsightStream + ClaudeForge</div></div>
+    <div class="deploy-card"><div class="icon">🌍</div><div class="name">Netlify</div><div class="detail">OmniDesk frontend</div></div>
+    <div class="deploy-card"><div class="icon">🎨</div><div class="name">Render</div><div class="detail">OmniDesk + TrendFactory</div></div>
+    <div class="deploy-card"><div class="icon">🪰</div><div class="name">Fly.io</div><div class="detail">DevSquad + ResearchSynthesis</div></div>
+    <div class="deploy-card"><div class="icon">☁️</div><div class="name">Azure</div><div class="detail">SupplyConsensus</div></div>
+    <div class="deploy-card"><div class="icon">🔵</div><div class="name">GCP Cloud Run</div><div class="detail">MarketPulse</div></div>
+    <div class="deploy-card"><div class="icon">🟠</div><div class="name">AWS ECS</div><div class="detail">PatentIQ</div></div>
+    <div class="deploy-card"><div class="icon">🔥</div><div class="name">Firebase</div><div class="detail">OmniDesk auth</div></div>
+    <div class="deploy-card"><div class="icon">☁️</div><div class="name">Cloudflare</div><div class="detail">CDN + Workers (all)</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ OFFLINE RESILIENCE ═══════════════════════════ -->
+<section id="offline">
+  <div class="section-label">06 — Resilience</div>
+  <h2>Offline-Resilient Workflow</h2>
+  <p class="section-intro">If you're away for 2-3 days, this system keeps building. Automated GitHub Actions handle the build pipeline.</p>
+
+  <div class="resilience-box">
+    <h3>🤖 Auto-Build System — Works Without You</h3>
+    <p style="font-size:0.85rem;color:#a7f3d0;margin-bottom:1rem;">Set this up once and the projects keep progressing via scheduled GitHub Actions + automated deployments.</p>
+    <pre style="margin:0;background:rgba(0,0,0,0.3);border-color:rgba(16,185,129,0.2);">
+<span class="comment"># .github/workflows/auto-build.yml</span>
+name: Nightly Auto-Build
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   <span class="comment"># Runs 2 AM UTC every night</span>
+  push:
+    branches: [main, 'feat/**']
+
+jobs:
+  parallel-build:
+    strategy:
+      matrix:
+        project: [venture-graph, omni-desk, dev-squad, supply-consensus,
+                  market-pulse, insight-stream, research-synthesis,
+                  trend-factory, patent-iq, claude-forge]
+      max-parallel: 10    <span class="comment"># All 10 in parallel</span>
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ${{ matrix.project }}
+        run: cd projects/${{ matrix.project }} && npm run build
+      - name: Run tests
+        run: cd projects/${{ matrix.project }} && npm test
+      - name: Deploy
+        run: cd projects/${{ matrix.project }} && npm run deploy
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    </pre>
+  </div>
+
+  <h3 style="margin-bottom:1rem;font-family:'Syne',sans-serif;">Handoff Document — Save Before Leaving</h3>
+  <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem;">Run <code>/dx:handoff</code> in each agent window before you close your laptop. This creates a context file that any new Claude session can pick up.</p>
+
+  <pre>
+<span class="comment"># scripts/save-all-handoffs.sh — run this before going offline</span>
+for window in $(seq 1 10); do
+  <span class="cmd">tmux send-keys -t ai-sdk-projects:$window "/dx:handoff" Enter</span>
+  sleep 2
+done
+<span class="comment"># All 10 agents create their handoff documents automatically</span>
+<span class="comment"># When you return: load each handoff.md and resume</span>
+  </pre>
+
+  <div class="highlight">
+    <strong>Resume after 2-3 days:</strong> Open each tmux window, run <code>claude --resume handoff.md</code>. The agent reads the handoff, understands where it left off, and continues. GitHub Actions will have run nightly builds, so you can check the Actions tab to see what got built while you were away.
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CI/CD ═══════════════════════════ -->
+<section id="cicd">
+  <div class="section-label">07 — DevOps</div>
+  <h2>CI/CD & GitHub Setup</h2>
+  <p class="section-intro">10 repositories, all with automated pipelines, branch protection, and deployment previews.</p>
+
+  <pre>
+<span class="comment">#!/bin/bash — scripts/create-all-repos.sh</span>
+<span class="comment"># Creates all 10 GitHub repos with proper settings</span>
+
+REPOS=(
+  "venture-graph:LangGraph stateful multi-agent venture planning SaaS"
+  "omni-desk:LangChain enterprise RAG with 500+ integrations"
+  "dev-squad:OpenAI SDK AI software development team"
+  "supply-consensus:AutoGen distributed multi-cloud supply chain agents"
+  "market-pulse:Google ADK competitor intelligence with Vertex grounding"
+  "insight-stream:Vercel AI SDK streaming generative UI dashboard"
+  "research-synthesis:LlamaIndex knowledge graph RAG for academic papers"
+  "trend-factory:CrewAI role-based marketing content generation crew"
+  "patent-iq:Haystack industrial patent search with extractive QA"
+  "claude-forge:Claude SDK autonomous coding agent with Computer Use"
+)
+
+for REPO_INFO in "${REPOS[@]}"; do
+  NAME="${REPO_INFO%%:*}"
+  DESC="${REPO_INFO#*:}"
+  
+  <span class="cmd">gh repo create "kazimusharraf/$NAME" \</span>
+    --public \
+    --description "$DESC" \
+    --license MIT \
+    --gitignore Node
+
+  <span class="comment"># Set branch protection</span>
+  <span class="cmd">gh api repos/kazimusharraf/$NAME/branches/main/protection \</span>
+    --method PUT \
+    --field required_status_checks='{"strict":true,"contexts":["test","lint"]}' \
+    --field enforce_admins=false \
+    --field required_pull_request_reviews='{"required_approving_review_count":0}'
+done
+  </pre>
+
+  <h3 style="margin-bottom:1rem;font-family:'Syne',sans-serif;">Universal CI Pipeline (adapts per project)</h3>
+  <pre>
+<span class="comment"># .github/workflows/ci.yml — drops into every project</span>
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        uses: ./.github/actions/setup   <span class="comment"># Detects Node/Python/Go</span>
+      - name: Lint          <span class="cmd">run: npm run lint || pnpm lint</span>
+      - name: Type check    <span class="cmd">run: npm run typecheck</span>
+      - name: Test (TDD)    <span class="cmd">run: npm run test:coverage</span>
+      - name: Security scan <span class="cmd">run: npx audit-ci --moderate</span>
+      - name: Build         <span class="cmd">run: npm run build</span>
+
+  deploy-preview:
+    needs: quality
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Deploy preview  <span class="comment"># Per-platform deploy</span>
+
+  deploy-production:
+    needs: quality
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy production
+  </pre>
+</section>
+
+<!-- ═══════════════════════════ CONTENT CREATION ═══════════════════════════ -->
+<section id="content">
+  <div class="section-label">08 — Content Pipeline</div>
+  <h2>Content Creation Guides</h2>
+  <p class="section-intro">Turn all 10 projects into a professional portfolio that showcases on LinkedIn, YouTube, Reddit, and X.com.</p>
+
+  <div class="guide-grid">
+    <div class="guide-card">
+      <div class="guide-icon">📄</div>
+      <h4>PDF Portfolio Guide</h4>
+      <ul class="guide-steps">
+        <li><strong>Tool:</strong> Use iLovePDF API or ConvertAPI (you have both keys)</li>
+        <li><strong>Step 1:</strong> Each project has auto-generated docs via Docusaurus/Nextra</li>
+        <li><strong>Step 2:</strong> Script exports each docs site to PDF: <code>puppeteer --print-to-pdf</code></li>
+        <li><strong>Step 3:</strong> Merge all 10 PDFs into one portfolio: <code>ilovepdf.merge()</code></li>
+        <li><strong>Step 4:</strong> Add cover page, TOC, bookmarks</li>
+        <li><strong>Output:</strong> "AI-SDK-Portfolio-2025.pdf" — 50-80 pages</li>
+      </ul>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">📊</div>
+      <h4>PowerPoint / Slides Guide</h4>
+      <ul class="guide-steps">
+        <li><strong>Tool:</strong> Gamma.app (connected MCP) or pptxgenjs</li>
+        <li><strong>Structure:</strong> 3 slides per project × 10 = 30 slides</li>
+        <li><strong>Slide 1:</strong> Problem + SDK unique value prop</li>
+        <li><strong>Slide 2:</strong> Architecture diagram + tech stack</li>
+        <li><strong>Slide 3:</strong> Live demo screenshot + key metrics</li>
+        <li><strong>Use Gamma MCP:</strong> <code>generate_presentation("AI SDK Portfolio")</code></li>
+      </ul>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">🎬</div>
+      <h4>YouTube Video Guide</h4>
+      <ul class="guide-steps">
+        <li><strong>Format:</strong> 10 videos (one per project) + 1 mega-overview</li>
+        <li><strong>Per-video length:</strong> 8-12 minutes</li>
+        <li><strong>Structure:</strong> Hook (30s) → Problem (1m) → Demo (5m) → Code walkthrough (3m) → CTA</li>
+        <li><strong>Recording:</strong> OBS Studio + project running locally</li>
+        <li><strong>Edit:</strong> DaVinci Resolve (free) or CapCut</li>
+        <li><strong>Thumbnail:</strong> Canva template per project color</li>
+        <li><strong>Upload:</strong> YouTube API (you have the key)</li>
+      </ul>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">💼</div>
+      <h4>LinkedIn Strategy</h4>
+      <ul class="guide-steps">
+        <li><strong>Day 1:</strong> Teaser post — "Building 10 AI SDK projects simultaneously"</li>
+        <li><strong>Days 2-11:</strong> One deep-dive post per project (daily)</li>
+        <li><strong>Format:</strong> Problem → Solution → Screenshot → Code snippet → Lessons</li>
+        <li><strong>Article:</strong> "Complete Guide to All 10 AI SDKs in 2025" — long-form</li>
+        <li><strong>Auto-post:</strong> Use Ayrshare API (you have the key)</li>
+        <li><strong>Best time:</strong> 8 AM IST Tuesday-Thursday</li>
+      </ul>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">🔴</div>
+      <h4>Reddit Strategy</h4>
+      <ul class="guide-steps">
+        <li><strong>Subreddits:</strong> r/MachineLearning, r/LocalLLaMA, r/Python, r/webdev, r/SideProject</li>
+        <li><strong>Rule:</strong> Give value first, GitHub link second</li>
+        <li><strong>Post format:</strong> "I built [X] using [SDK] — here's what I learned"</li>
+        <li><strong>Include:</strong> Lessons, mistakes, code snippets — not just promotion</li>
+        <li><strong>Timing:</strong> Post at 2 PM EST on weekdays</li>
+        <li><strong>Follow-up:</strong> Respond to every comment within 1 hour</li>
+      </ul>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-icon">𝕏</div>
+      <h4>X.com Strategy</h4>
+      <ul class="guide-steps">
+        <li><strong>Thread format:</strong> 10-tweet thread (one per project)</li>
+        <li><strong>Tweet 1:</strong> "I built 10 production AI apps in 6 weeks. Thread 🧵"</li>
+        <li><strong>Each tweet:</strong> Project name + 1 screenshot + key insight</li>
+        <li><strong>Final tweet:</strong> GitHub link + call to action</li>
+        <li><strong>Hashtags:</strong> #AI #BuildInPublic #LangChain #OpenAI</li>
+        <li><strong>Schedule:</strong> Use Buffer (you have the keys) or X API</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin:2rem 0 1rem;font-family:'Syne',sans-serif;">Auto-Generate Content Script</h3>
+  <pre>
+<span class="comment"># content/generate-all.py — runs after all 10 projects are built</span>
+<span class="comment"># Uses Claude API to generate all content automatically</span>
+
+import anthropic
+client = anthropic.Anthropic()
+
+for project in PROJECTS:
+    <span class="comment"># Generate README</span>
+    readme = client.messages.create(
+        model="claude-opus-4-6",
+        messages=[{"role": "user", "content": f"Generate professional README for {project['name']}..."}]
+    )
+    
+    <span class="comment"># Generate LinkedIn post</span>
+    linkedin = client.messages.create(
+        model="claude-sonnet-4-6", 
+        messages=[{"role": "user", "content": f"Write LinkedIn post for {project['name']}..."}]
+    )
+    
+    <span class="comment"># Generate YouTube script</span>
+    youtube = client.messages.create(
+        model="claude-sonnet-4-6",
+        messages=[{"role": "user", "content": f"Write 10-minute YouTube script for {project['name']}..."}]
+    )
+    
+    <span class="comment"># Save all content</span>
+    save_content(project, readme, linkedin, youtube)
+  </pre>
+</section>
+
+<!-- ═══════════════════════════ SOCIAL ═══════════════════════════ -->
+<section id="social">
+  <div class="section-label">09 — Launch</div>
+  <h2>Social Media Launch Plan</h2>
+
+  <table class="cmd-table">
+    <tr>
+      <th>Day</th>
+      <th>Platform</th>
+      <th>Content</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td>-3</td>
+      <td>LinkedIn + X</td>
+      <td>"Something big is coming... 👀 Building 10 AI SDK projects"</td>
+      <td>Teaser post</td>
+    </tr>
+    <tr>
+      <td>0 (Launch)</td>
+      <td>GitHub</td>
+      <td>All 10 repos go public simultaneously</td>
+      <td><code>gh repo edit --visibility public</code></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>X.com</td>
+      <td>10-tweet mega thread</td>
+      <td>Schedule via Buffer</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Reddit</td>
+      <td>r/MachineLearning overview post</td>
+      <td>Manual post + engage</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>LinkedIn</td>
+      <td>Project 1: VentureGraph deep-dive</td>
+      <td>Ayrshare API auto-post</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>YouTube</td>
+      <td>VentureGraph demo video</td>
+      <td>YouTube API upload</td>
+    </tr>
+    <tr>
+      <td>2-10</td>
+      <td>All platforms</td>
+      <td>One project per day</td>
+      <td>Ayrshare scheduled</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>LinkedIn</td>
+      <td>Long-form article: "Building 10 AI SDK Apps"</td>
+      <td>Publish article</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>ProductHunt</td>
+      <td>Launch best project (InsightStream or ClaudeForge)</td>
+      <td>ProductHunt launch</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════ COMMANDS ═══════════════════════════ -->
+<section id="commands">
+  <div class="section-label">10 — Reference</div>
+  <h2>Master Command Reference</h2>
+
+  <table class="cmd-table">
+    <tr>
+      <th>Category</th>
+      <th>Command</th>
+      <th>When to Use</th>
+    </tr>
+    <tr><td rowspan="5" style="color:var(--accent3);">Superpowers</td>
+      <td><code>/brainstorm</code></td><td>Start of every new feature</td></tr>
+    <tr><td><code>/systematic-debug</code></td><td>Any bug > 20 min</td></tr>
+    <tr><td><code>/instinct-status</code></td><td>Check learned patterns</td></tr>
+    <tr><td><code>/learn</code></td><td>End of each session</td></tr>
+    <tr><td><code>/evolve</code></td><td>Weekly pattern clustering</td></tr>
+
+    <tr><td rowspan="6" style="color:var(--accent2);">ECC</td>
+      <td><code>/plan "feature"</code></td><td>Before writing any code</td></tr>
+    <tr><td><code>/tdd</code></td><td>Start implementation (write test first)</td></tr>
+    <tr><td><code>/code-review</code></td><td>Before every commit</td></tr>
+    <tr><td><code>/security-scan</code></td><td>Before every deploy</td></tr>
+    <tr><td><code>/architect</code></td><td>New system design needed</td></tr>
+    <tr><td><code>/e2e</code></td><td>Critical user paths</td></tr>
+
+    <tr><td rowspan="4" style="color:var(--accent4);">ykdojo</td>
+      <td><code>/dx:handoff</code></td><td>Before going offline / ending session</td></tr>
+    <tr><td><code>/dx:clone</code></td><td>Starting fresh agent session</td></tr>
+    <tr><td><code>/dx:half-clone</code></td><td>Context getting large (>80%)</td></tr>
+    <tr><td><code>/compact</code></td><td>At logical task milestones</td></tr>
+
+    <tr><td rowspan="3" style="color:var(--accent5);">Infrastructure</td>
+      <td><code>./scripts/bootstrap.sh</code></td><td>Day 1 — set up everything</td></tr>
+    <tr><td><code>./scripts/deploy-all.sh</code></td><td>Deploy all 10 projects</td></tr>
+    <tr><td><code>doppler run -- claude</code></td><td>Start any agent with secrets</td></tr>
+  </table>
+
+  <hr>
+
+  <h3 style="margin-bottom:1rem;font-family:'Syne',sans-serif;">Each Project's Internal Structure</h3>
+  <pre>
+projects/venture-graph/
+├── <span class="key">.claude/</span>
+│   ├── CLAUDE.md              ← Project-specific instructions
+│   └── handoff.md             ← Auto-created by /dx:handoff
+├── <span class="key">frontend/</span>               ← Next.js 15
+│   ├── app/
+│   ├── components/
+│   └── public/
+├── <span class="key">backend/</span>                ← FastAPI + LangGraph
+│   ├── agents/
+│   ├── graphs/
+│   ├── api/
+│   └── tests/                 ← TDD tests first
+├── <span class="key">docs/</span>                   ← Nextra docs site
+│   ├── pages/
+│   │   ├── getting-started.mdx
+│   │   ├── api-reference.mdx
+│   │   └── developer-guide.mdx
+├── <span class="key">website/</span>               ← Landing page
+│   ├── index.html
+│   ├── pricing.html
+│   └── blog/
+├── <span class="key">.github/workflows/</span>
+│   ├── ci.yml
+│   └── deploy.yml
+├── docker-compose.yml
+├── Dockerfile
+├── README.md                  ← Auto-generated by Claude
+└── CONTRIBUTING.md
+  </pre>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <div class="big">AI SDK PROJECTS</div>
+  <p>Master Blueprint — Generated 2026-02-18</p>
+  <p style="margin-top:0.5rem;">10 Projects · 25+ Providers · ~132k ⭐ Ecosystems · Full SaaS · Complete DevOps</p>
+  <p style="margin-top:1rem;color:#ff4d6d;">⚠️ Rotate all API keys before starting. Never commit secrets.</p>
+</footer>
+
+</body>
+</html>
