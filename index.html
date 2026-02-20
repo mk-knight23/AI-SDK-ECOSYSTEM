@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-SDK ECOSYSTEM | Master Blueprint</title>
+    <title>AI-SDK ECOSYSTEM | Master Showcase</title>
     <meta name="description" content="10 Production-Ready AI SDK Implementations - LangChain, CrewAI, LangGraph, AutoGen, OpenAI, Vercel AI, Anthropic, Haystack, Semantic Kernel, LlamaIndex">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
@@ -13,26 +13,194 @@
             --text: #e8e8f0; --muted: #7070a0; --card: #1a1a26;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; line-height: 1.7; overflow-x: hidden; }
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; position: relative; background: radial-gradient(ellipse at 30% 20%, #1a0a2e 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, #0a1a2e 0%, transparent 60%), var(--bg); }
-        .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(124,58,237,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.03) 1px, transparent 1px); background-size: 60px 60px; }
-        .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border: 1px solid var(--accent); border-radius: 100px; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; background: rgba(255,77,109,0.05); }
-        .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 8vw, 7rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
-        .hero h1 span.gradient { background: linear-gradient(135deg, #ff4d6d, #7c3aed, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-sub { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.4rem; color: var(--muted); max-width: 600px; margin-bottom: 3rem; }
-        .hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center; }
-        .stat { text-align: center; }
-        .stat-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--accent3); }
-        .stat-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-        section { padding: 6rem 2rem; max-width: 1400px; margin: 0 auto; }
-        .section-label { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
-        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 80px; }
-        h2 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
-        .section-intro { color: var(--muted); max-width: 700px; margin-bottom: 4rem; font-size: 0.95rem; }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-        .project-card { background: var(--card); padding: 2rem; transition: background 0.2s; position: relative; overflow: hidden; }
-        .project-card:hover { background: #1e1e2e; }
-        .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: radial-gradient(ellipse at 30% 20%, #1a0a2e 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 80%, #0a1a2e 0%, transparent 60%),
+                        var(--bg);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(124,58,237,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124,58,237,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            background: rgba(255,77,109,0.08);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero h1 span.gradient {
+            background: linear-gradient(135deg, #ff4d6d, #7c3aed, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem 2rem;
+            background: rgba(22,22,38,0.5);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent3);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+            max-width: 80px;
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-intro {
+            color: var(--muted);
+            max-width: 700px;
+            margin-bottom: 4rem;
+            font-size: 0.95rem;
+        }
+
+        /* PROJECT GRID */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .project-card {
+            background: var(--card);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            background: #1e1e2e;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-card:focus-within {
+            outline: 2px solid var(--accent3);
+            outline-offset: -2px;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+
         .p1::before { background: linear-gradient(90deg, #ff4d6d, #ff9a9e); }
         .p2::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
         .p3::before { background: linear-gradient(90deg, #06b6d4, #67e8f9); }
@@ -43,169 +211,747 @@
         .p8::before { background: linear-gradient(90deg, #f97316, #fed7aa); }
         .p9::before { background: linear-gradient(90deg, #14b8a6, #99f6e4); }
         .p10::before { background: linear-gradient(90deg, #6366f1, #a5b4fc); }
-        .project-num { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; opacity: 0.08; position: absolute; top: 1rem; right: 1.5rem; line-height: 1; }
-        .project-sdk { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; display: inline-block; margin-bottom: 1rem; }
-        .project-name { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .project-tagline { color: var(--muted); font-size: 0.8rem; margin-bottom: 1.5rem; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
-        .tag { font-size: 0.65rem; letter-spacing: 0.05em; padding: 3px 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; color: var(--muted); }
-        .project-apis { font-size: 0.72rem; color: var(--accent3); }
+
+        .project-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            opacity: 0.08;
+            position: absolute;
+            top: 1rem; right: 1.5rem;
+            line-height: 1;
+        }
+
+        .project-sdk {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tagline {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--muted);
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            border-color: var(--accent3);
+            color: var(--accent3);
+        }
+
+        .project-apis {
+            font-size: 0.75rem;
+            color: var(--accent3);
+            margin-bottom: 1rem;
+        }
+
         .project-apis span { color: var(--muted); }
-        .btn { display: inline-block; padding: 10px 24px; background: var(--accent); color: white; text-decoration: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; margin-top: 0.5rem; }
-        .btn:hover { background: var(--accent2); transform: translateY(-2px); }
-        .deploy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin-top: 2rem; }
-        .deploy-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; text-align: center; }
-        .deploy-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-        .deploy-card .name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; }
-        .deploy-card .detail { font-size: 0.65rem; color: var(--muted); margin-top: 0.25rem; }
-        footer { text-align: center; padding: 4rem 2rem; color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); }
-        footer .big { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; opacity: 0.1; }
-        .providers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
-        .provider { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; font-size: 0.78rem; }
-        .provider-name { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 0.25rem; font-size: 0.9rem; }
-        .provider-type { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-        @media (max-width: 768px) { .hero { padding: 2rem 1rem; } .projects-grid { grid-template-columns: 1fr; } }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .btn:hover, .btn:focus {
+            background: var(--accent2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,77,109,0.3);
+        }
+
+        .btn:focus {
+            outline: 2px solid var(--accent3);
+            outline-offset: 2px;
+        }
+
+        /* DEPLOYMENT GRID */
+        .deploy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .deploy-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .deploy-card:hover {
+            border-color: var(--accent3);
+            transform: translateY(-4px);
+        }
+
+        .deploy-card .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .deploy-card .name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+        .deploy-card .detail { font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; }
+
+        /* PROVIDER GRID */
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .provider {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .provider:hover {
+            border-color: var(--accent3);
+        }
+
+        .provider-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .provider-type {
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+        }
+
+        .provider-projects {
+            font-size: 0.75rem;
+            color: var(--accent3);
+        }
+
+        /* ARCHITECTURE DIAGRAM */
+        .arch-diagram {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            font-family: 'DM Mono', monospace;
+            line-height: 1.8;
+            margin: 2rem 0;
+        }
+
+        .arch-diagram .key { color: var(--accent3); }
+        .arch-diagram .val { color: var(--accent5); }
+        .arch-diagram .comment { color: #4a4a6a; }
+
+        /* HIGHLIGHT BOXES */
+        .highlight {
+            background: rgba(124,58,237,0.1);
+            border-left: 4px solid var(--accent2);
+            padding: 1.5rem 2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .info {
+            background: rgba(6,182,212,0.08);
+            border-left: 4px solid var(--accent3);
+            padding: 1.5rem 2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            color: #67e8f9;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg2);
+        }
+
+        footer .big {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.1;
+            margin-bottom: 1rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero { padding: 2rem 1rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .section-intro { font-size: 0.85rem; }
+            .hero-stats { gap: 1rem; }
+            .stat { padding: 0.75rem 1rem; }
+            .stat-num { font-size: 2rem; }
+        }
+
+        /* ACCESSIBILITY */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* SCROLL BEHAVIOR */
+        html { scroll-behavior: smooth; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
     </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
-    <div class="badge">🚀 AI-SDK ECOSYSTEM — Master Blueprint v1.0</div>
+    <div class="badge">🚀 AI-SDK ECOSYSTEM — Master Showcase v1.0</div>
     <h1>Build <span class="gradient">10 SaaS<br>Products</span><br>Simultaneously</h1>
     <p class="hero-sub">Complete AI SDK showcase ecosystem with production-ready implementations across 10 major AI frameworks</p>
     <div class="hero-stats">
-        <div class="stat"><div class="stat-num">10</div><div class="stat-label">SDK Products</div></div>
-        <div class="stat"><div class="stat-num">10</div><div class="stat-label">AI Frameworks</div></div>
-        <div class="stat"><div class="stat-num">25+</div><div class="stat-label">API Providers</div></div>
-        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Deploy Targets</div></div>
+        <div class="stat">
+            <div class="stat-num">10</div>
+            <div class="stat-label">SDK Products</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">10</div>
+            <div class="stat-label">AI Frameworks</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">25+</div>
+            <div class="stat-label">API Providers</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">10</div>
+            <div class="stat-label">Deploy Targets</div>
+        </div>
     </div>
 </div>
 
-<section>
+<!-- PROJECTS -->
+<section id="projects">
     <div class="section-label">01 — The Products</div>
     <h2>All 10 Projects</h2>
     <p class="section-intro">Each repository is a production-ready SaaS product showcasing a unique AI framework with modern web stack, complete documentation, and deployment pipeline.</p>
 
     <div class="projects-grid">
-        <div class="project-card p1">
+        <div class="project-card p1" tabindex="0">
             <div class="project-num">01</div>
-            <div class="project-sdk" style="background:rgba(255,77,109,0.1);color:#ff4d6d;">LangGraph</div>
+            <div class="project-sdk" style="background:rgba(255,77,109,0.1);color:#ff4d6d;">LangChain</div>
             <div class="project-name">AI-SDK-LANGCHAIN</div>
             <div class="project-tagline">Stateful multi-agent applications with cyclic graph topology and LangSmith integration</div>
-            <div class="tech-tags"><span class="tag">Next.js 15</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">LangGraph</span></div>
+            <div class="tech-tags">
+                <span class="tag">Next.js 15</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Redis</span>
+                <span class="tag">LangGraph</span>
+                <span class="tag">Tailwind</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>OpenAI, Anthropic, OpenRouter, Perplexity</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-LANGCHAIN" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-LANGCHAIN" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p2">
+        <div class="project-card p2" tabindex="0">
             <div class="project-num">02</div>
             <div class="project-sdk" style="background:rgba(124,58,237,0.1);color:#a78bfa;">CrewAI</div>
             <div class="project-name">AI-SDK-CREWAI</div>
             <div class="project-tagline">Multi-agent orchestration with role-based AI teams working together</div>
-            <div class="tech-tags"><span class="tag">React 19</span><span class="tag">FastAPI</span><span class="tag">Qdrant</span><span class="tag">CrewAI</span></div>
+            <div class="tech-tags">
+                <span class="tag">React 19</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Qdrant</span>
+                <span class="tag">CrewAI</span>
+                <span class="tag">Celery</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>OpenAI, Anthropic, Groq</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-CREWAI" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-CREWAI" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p3">
+        <div class="project-card p3" tabindex="0">
             <div class="project-num">03</div>
-            <div class="project-sdk" style="background:rgba(6,182,212,0.1);color:#06b6d4;">LangChain</div>
+            <div class="project-sdk" style="background:rgba(6,182,212,0.1);color:#06b6d4;">LangGraph</div>
             <div class="project-name">AI-SDK-LANGGRAPH</div>
             <div class="project-tagline">Stateful agent workflows with cyclic graphs and checkpointing</div>
-            <div class="tech-tags"><span class="tag">SvelteKit</span><span class="tag">Node.js</span><span class="tag">LangGraph</span><span class="tag">WebSocket</span></div>
+            <div class="tech-tags">
+                <span class="tag">SvelteKit</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">LangGraph</span>
+                <span class="tag">WebSocket</span>
+                <span class="tag">Bun</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>OpenAI, Anthropic</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-LANGGRAPH" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-LANGGRAPH" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p4">
+        <div class="project-card p4" tabindex="0">
             <div class="project-num">04</div>
             <div class="project-sdk" style="background:rgba(245,158,11,0.1);color:#f59e0b;">AutoGen</div>
             <div class="project-name">AI-SDK-AUTOGEN</div>
             <div class="project-tagline">Distributed multi-agent systems with gRPC communication</div>
-            <div class="tech-tags"><span class="tag">Vue 3</span><span class="tag">.NET 9</span><span class="tag">AutoGen</span><span class="tag">gRPC</span></div>
+            <div class="tech-tags">
+                <span class="tag">Vue 3</span>
+                <span class="tag">.NET 9</span>
+                <span class="tag">AutoGen</span>
+                <span class="tag">gRPC</span>
+                <span class="tag">Azure</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>Azure OpenAI, MiniMax, Cerebras</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-AUTOGEN" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-AUTOGEN" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p5">
+        <div class="project-card p5" tabindex="0">
             <div class="project-num">05</div>
             <div class="project-sdk" style="background:rgba(16,185,129,0.1);color:#10b981;">OpenAI</div>
             <div class="project-name">AI-SDK-OPENAI</div>
             <div class="project-tagline">Assistants API with GPT-4o integration and real-time streaming</div>
-            <div class="tech-tags"><span class="tag">Angular 19</span><span class="tag">Go Fiber</span><span class="tag">OpenAI SDK</span></div>
+            <div class="tech-tags">
+                <span class="tag">Angular 19</span>
+                <span class="tag">Go Fiber</span>
+                <span class="tag">OpenAI SDK</span>
+                <span class="tag">GraphQL</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>OpenAI, Azure OpenAI</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-OPENAI" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-OPENAI" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p6">
+        <div class="project-card p6" tabindex="0">
             <div class="project-num">06</div>
             <div class="project-sdk" style="background:rgba(236,72,153,0.1);color:#ec4899;">Vercel AI</div>
             <div class="project-name">AI-SDK-VERCEL-AI</div>
             <div class="project-tagline">Streaming generative UI with React Server Components</div>
-            <div class="tech-tags"><span class="tag">Next.js 15 RSC</span><span class="tag">Vercel AI SDK</span><span class="tag">Radix UI</span></div>
+            <div class="tech-tags">
+                <span class="tag">Next.js 15 RSC</span>
+                <span class="tag">Vercel AI SDK</span>
+                <span class="tag">Radix UI</span>
+                <span class="tag">Recharts</span>
+                <span class="tag">Drizzle</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>Anthropic, OpenAI, Google Gemini</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-VERCEL-AI" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-VERCEL-AI" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p7">
+        <div class="project-card p7" tabindex="0">
             <div class="project-num">07</div>
             <div class="project-sdk" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">Anthropic</div>
             <div class="project-name">AI-SDK-ANTHROPIC</div>
             <div class="project-tagline">Claude API with extended thinking and message streaming</div>
-            <div class="tech-tags"><span class="tag">Remix</span><span class="tag">FastAPI</span><span class="tag">Anthropic SDK</span></div>
+            <div class="tech-tags">
+                <span class="tag">Remix</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Anthropic SDK</span>
+                <span class="tag">Chakra UI</span>
+            </div>
             <div class="project-apis"><span>APIs: </span>Anthropic Claude, OpenRouter</div>
-            <a href="https://github.com/mk-knight23/AI-SDK-ANTHROPIC" class="btn" target="_blank">View Repository →</a>
+            <a href="https://github.com/mk-knight23/AI-SDK-ANTHROPIC" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p8">
+        <div class="project-card p8" tabindex="0">
             <div class="project-num">08</div>
-            <div class="project-sdk" style="background:rgba(249,115,22,0.1);color:#f97316;">CrewAI</div>
+            <div class="project-sdk" style="background:rgba(249,115,22,0.1);color:#f97316;">Haystack</div>
             <div class="project-name">AI-SDK-HAYSTACK</div>
-            <div class="project-tagline">Wait - this should be Haystack. Let me fix the naming.</div>
-            <div class="tech-tags"><span class="tag">Nuxt 3</span><span class="tag">Django</span><span class="tag">Haystack</span></div>
-            <a href="https://github.com/mk-knight23/AI-SDK-HAYSTACK" class="btn" target="_blank">View Repository →</a>
+            <div class="project-tagline">Document AI with extractive QA and hybrid retrieval</div>
+            <div class="tech-tags">
+                <span class="tag">Nuxt 3</span>
+                <span class="tag">Django</span>
+                <span class="tag">Haystack 2.0</span>
+                <span class="tag">Elasticsearch</span>
+            </div>
+            <div class="project-apis"><span>APIs: </span>Mistral, Deepgram, iLovePDF</div>
+            <a href="https://github.com/mk-knight23/AI-SDK-HAYSTACK" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p9">
+        <div class="project-card p9" tabindex="0">
             <div class="project-num">09</div>
             <div class="project-sdk" style="background:rgba(20,184,166,0.1);color:#14b8a6;">Semantic Kernel</div>
             <div class="project-name">AI-SDK-SEMANTIC-KERNEL</div>
             <div class="project-tagline">Microsoft AI orchestration with skill-based agents</div>
-            <div class="tech-tags"><span class="tag">Astro 5</span><span class="tag">Flask</span><span class="tag">Semantic Kernel</span></div>
-            <a href="https://github.com/mk-knight23/AI-SDK-SEMANTIC-KERNEL" class="btn" target="_blank">View Repository →</a>
+            <div class="tech-tags">
+                <span class="tag">Astro 5</span>
+                <span class="tag">Flask</span>
+                <span class="tag">Semantic Kernel</span>
+                <span class="tag">React Islands</span>
+            </div>
+            <div class="project-apis"><span>APIs: </span>Azure OpenAI, OpenAI, HuggingFace</div>
+            <a href="https://github.com/mk-knight23/AI-SDK-SEMANTIC-KERNEL" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
 
-        <div class="project-card p10">
+        <div class="project-card p10" tabindex="0">
             <div class="project-num">10</div>
             <div class="project-sdk" style="background:rgba(99,102,241,0.1);color:#6366f1;">LlamaIndex</div>
             <div class="project-name">AI-SDK-LAMA-INDEX</div>
-            <div class="project-tagline">Data framework for LLM applications with vector stores</div>
-            <div class="tech-tags"><span class="tag">T3 Stack</span><span class="tag">FastAPI</span><span class="tag">LlamaIndex</span></div>
-            <a href="https://github.com/mk-knight23/AI-SDK-LAMA-INDEX" class="btn" target="_blank">View Repository →</a>
+            <div class="project-tagline">Data framework for LLM applications with vector stores and GraphRAG</div>
+            <div class="tech-tags">
+                <span class="tag">T3 Stack</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">LlamaIndex</span>
+                <span class="tag">tRPC</span>
+            </div>
+            <div class="project-apis"><span>APIs: </span>Anthropic, OpenRouter, AgentRouter</div>
+            <a href="https://github.com/mk-knight23/AI-SDK-LAMA-INDEX" class="btn" target="_blank" rel="noopener">
+                View Repository →
+            </a>
         </div>
     </div>
 </section>
 
-<section>
-    <div class="section-label">02 — Deployment</div>
-    <h2>Deployment Matrix</h2>
-    <p class="section-intro">Each project deploys to a different hosting platform demonstrating full DevOps breadth.</p>
-    <div class="deploy-grid">
-        <div class="deploy-card"><div class="icon">🚄</div><div class="name">Railway</div><div class="detail">LANGCHAIN</div></div>
-        <div class="deploy-card"><div class="icon">🎨</div><div class="name">Render</div><div class="detail">CREWAI, HAYSTACK</div></div>
-        <div class="deploy-card"><div class="icon">🪰</div><div class="name">Fly.io</div><div class="detail">LANGGRAPH, ANTHROPIC</div></div>
-        <div class="deploy-card"><div class="icon">☁️</div><div class="name">Azure</div><div class="detail">AUTOGEN</div></div>
-        <div class="deploy-card"><div class="icon">🔵</div><div class="name">GCP Cloud Run</div><div class="detail">OPENAI</div></div>
-        <div class="deploy-card"><div class="icon">▲</div><div class="name">Vercel</div><div class="detail">VERCEL-AI, LAMA-INDEX</div></div>
-        <div class="deploy-card"><div class="icon">🟠</div><div class="name">AWS ECS</div><div class="detail">SEMANTIC-KERNEL</div></div>
+<!-- ARCHITECTURE -->
+<section id="architecture">
+    <div class="section-label">02 — Foundation</div>
+    <h2>Ecosystem Architecture</h2>
+    <p class="section-intro">The complete ecosystem structure showcasing how all 10 independent repositories work together as a comprehensive AI SDK portfolio.</p>
+
+    <div class="highlight">
+        <strong>🎯 Key Architecture Principle:</strong> Each repository is completely independent with no cross-repo dependencies. This ensures maximum flexibility — each project can be developed, deployed, and maintained entirely on its own.
+    </div>
+
+    <div class="arch-diagram">
+<span class="key">AI-SDK-ECOSYSTEM/</span>                      ← Main showcase (this page)
+├── <span class="val">README.md</span>                          ← Ecosystem overview
+├── <span class="val">index.html</span>                        ← This showcase page
+└── <span class="comment">10 Independent Repositories →</span>
+
+<span class="key">┌── AI-SDK-LANGCHAIN/</span>       ← LangChain Ecosystem
+│   ├── <span class="val">frontend/</span>              ← Next.js 15 + Tailwind
+│   ├── <span class="val">backend/</span>               ← FastAPI + LangGraph
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-CREWAI/</span>           ← CrewAI Multi-Agent
+│   ├── <span class="val">frontend/</span>              ← React 19 + MUI
+│   ├── <span class="val">backend/</span>               ← FastAPI + CrewAI
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-LANGGRAPH/</span>        ← LangGraph Stateful
+│   ├── <span class="val">frontend/</span>              ← SvelteKit + Skeleton
+│   ├── <span class="val">backend/</span>               ← Node.js + LangGraph
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-AUTOGEN/</span>          ← AutoGen Distributed
+│   ├── <span class="val">frontend/</span>              ← Vue 3 + Pinia
+│   ├── <span class="val">backend/</span>               ← .NET 9 + gRPC
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-OPENAI/</span>           ← OpenAI Assistants
+│   ├── <span class="val">frontend/</span>              ← Angular 19 + Material
+│   ├── <span class="val">backend/</span>               ← Go Fiber + OpenAI SDK
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-VERCEL-AI/</span>        ← Vercel AI SDK
+│   ├── <span class="val">app/</span>                   ← Next.js 15 RSC
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-ANTHROPIC/</span>        ← Anthropic Claude
+│   ├── <span class="val">app/</span>                   ← Remix + Chakra UI
+│   ├── <span class="val">backend/</span>               ← FastAPI + Anthropic SDK
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-HAYSTACK/</span>         ← Haystack Document AI
+│   ├── <span class="val">frontend/</span>              ← Nuxt 3 + Naive UI
+│   ├── <span class="val">backend/</span>               ← Django + Haystack 2.0
+│   └── <span class="val">README.md</span>
+
+<span class="key">┌── AI-SDK-SEMANTIC-KERNEL/</span>  ← Semantic Kernel
+│   ├── <span class="val">frontend/</span>              ← Astro 5 + React Islands
+│   ├── <span class="val">backend/</span>               ← Flask + Semantic Kernel
+│   └── <span class="val">README.md</span>
+
+<span class="key">└── AI-SDK-LAMA-INDEX/</span>       ← LlamaIndex Data Framework
+    ├── <span class="val">apps/web/</span>             ← T3 Stack (Next.js)
+    ├── <span class="val">backend/</span>              ← FastAPI + LlamaIndex
+    └── <span class="val">README.md</span>
     </div>
 </section>
 
+<!-- DEPLOYMENT -->
+<section id="deployment">
+    <div class="section-label">03 — Infrastructure</div>
+    <h2>Deployment Matrix</h2>
+    <p class="section-intro">Each project deploys to a different hosting platform — demonstrating full DevOps breadth across the ecosystem.</p>
+
+    <div class="deploy-grid">
+        <div class="deploy-card">
+            <div class="icon">🚄</div>
+            <div class="name">Railway</div>
+            <div class="detail">AI-SDK-LANGCHAIN</div>
+        </div>
+        <div class="deploy-card">
+            <div class="icon">🎨</div>
+            <div class="name">Render</div>
+            <div class="detail">AI-SDK-CREWAI, HAYSTACK</div>
+        </div>
+        <div class="deploy-card">
+            <div class="icon">🪰</div>
+            <div class="name">Fly.io</div>
+            <div class="detail">AI-SDK-LANGGRAPH, ANTHROPIC, LAMA-INDEX</div>
+        </div>
+        <div class="deploy-card">
+            <div class="icon">☁️</div>
+            <div class="name">Azure</div>
+            <div class="detail">AI-SDK-AUTOGEN</div>
+        </div>
+        <div class="deploy-card">
+            <div class="icon">🔵</div>
+            <div class="name">GCP Cloud Run</div>
+            <div class="detail">AI-SDK-OPENAI</div>
+        </div>
+        <div class="deploy-card">
+            <div class="icon">▲</div>
+            <div class="name">Vercel</div>
+            <div class="detail">AI-SDK-VERCEL-AI</div>
+        </div>
+        <div class="deploy-card">
+            <div class="icon">🟠</div>
+            <div class="name">AWS ECS</div>
+            <div class="detail">AI-SDK-SEMANTIC-KERNEL</div>
+        </div>
+    </div>
+
+    <div class="info">
+        <strong>💡 Deployment Strategy:</strong> Each platform showcases different DevOps capabilities — container orchestration, serverless functions, edge computing, and managed services. This provides comprehensive portfolio coverage for cloud infrastructure expertise.
+    </div>
+</section>
+
+<!-- API PROVIDERS -->
+<section id="providers">
+    <div class="section-label">04 — Integration</div>
+    <h2>API Provider Ecosystem</h2>
+    <p class="section-intro">All 25+ API providers distributed across projects. Each project uses a primary provider with fallback configurations for resilience.</p>
+
+    <div class="providers-grid">
+        <div class="provider">
+            <div class="provider-name">Anthropic Claude</div>
+            <div class="provider-type">Primary LLM</div>
+            <div class="provider-projects">Used in: 7 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">OpenAI</div>
+            <div class="provider-type">Primary LLM</div>
+            <div class="provider-projects">Used in: 8 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">OpenRouter</div>
+            <div class="provider-type">Multi-Model Router</div>
+            <div class="provider-projects">Fallback for all</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Google Gemini</div>
+            <div class="provider-type">Primary LLM + Vision</div>
+            <div class="provider-projects">Used in: 5 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Azure OpenAI</div>
+            <div class="provider-type">Enterprise LLM</div>
+            <div class="provider-projects">Used in: 3 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">HuggingFace</div>
+            <div class="provider-type">Open Source Models</div>
+            <div class="provider-projects">Used in: 4 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Groq</div>
+            <div class="provider-type">Ultra-Fast Inference</div>
+            <div class="provider-projects">Used in: 2 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Mistral AI</div>
+            <div class="provider-type">EU-Based LLM</div>
+            <div class="provider-projects">Used in: 3 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Perplexity</div>
+            <div class="provider-type">Search-Enhanced LLM</div>
+            <div class="provider-projects">Used in: 2 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Deepgram</div>
+            <div class="provider-type">Speech-to-Text</div>
+            <div class="provider-projects">Used in: 2 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Tavily / Exa</div>
+            <div class="provider-type">AI-Powered Search</div>
+            <div class="provider-projects">Used in: 4 projects</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Vector Stores</div>
+            <div class="provider-type">Pinecone, Qdrant, Weaviate</div>
+            <div class="provider-projects">Across all projects</div>
+        </div>
+    </div>
+</section>
+
+<!-- TECH STACK COVERAGE -->
+<section id="techstack">
+    <div class="section-label">05 — Coverage</div>
+    <h2>Full Stack Spectrum</h2>
+    <p class="section-intro">The ecosystem covers the entire modern web development landscape across frontend frameworks, backend languages, databases, and deployment platforms.</p>
+
+    <div class="providers-grid">
+        <div class="provider">
+            <div class="provider-name">Frontend Frameworks</div>
+            <div class="provider-type">10 Different</div>
+            <div class="provider-projects">Next.js, React, SvelteKit, Vue, Angular, Remix, Nuxt, Astro</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Backend Languages</div>
+            <div class="provider-type">6 Different</div>
+            <div class="provider-projects">Python, Node.js, Go, .NET, Flask, Django</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Databases</div>
+            <div class="provider-type">8 Different</div>
+            <div class="provider-projects">PostgreSQL, MongoDB, Redis, SQLite, Elasticsearch, Neo4j</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">UI Libraries</div>
+            <div class="provider-type">10 Different</div>
+            <div class="provider-projects">Tailwind, MUI, Radix, Chakra, Naive UI, shadcn/ui</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Authentication</div>
+            <div class="provider-type">5 Providers</div>
+            <div class="provider-projects">Auth0, NextAuth, Clerk, Firebase, Entra ID</div>
+        </div>
+        <div class="provider">
+            <div class="provider-name">Deployment</div>
+            <div class="provider-type">7 Platforms</div>
+            <div class="provider-projects">Railway, Render, Fly.io, Vercel, Azure, GCP, AWS</div>
+        </div>
+    </div>
+
+    <div class="highlight">
+        <strong>🎓 Learning Value:</strong> This ecosystem provides comprehensive exposure to the entire modern web development stack. Working across all 10 projects gives hands-on experience with every major frontend framework, backend language, and cloud platform — making it an exceptional portfolio for career growth.
+    </div>
+</section>
+
+<!-- GETTING STARTED -->
+<section id="getting-started">
+    <div class="section-label">06 — Quick Start</div>
+    <h2>Clone & Explore</h2>
+    <p class="section-intro">Start exploring any of the 10 projects. Each is fully independent and can be cloned and run separately.</p>
+
+    <div class="arch-diagram">
+<span class="comment"># Clone the main showcase repository</span>
+<span class="cmd">git clone https://github.com/mk-knight23/AI-SDK-ECOSYSTEM.git</span>
+<span class="cmd">cd AI-SDK-ECOSYSTEM</span>
+
+<span class="comment"># Open this showcase page</span>
+<span class="cmd">open index.html</span>
+
+<span class="comment"># Clone any individual project</span>
+<span class="cmd">git clone https://github.com/mk-knight23/AI-SDK-LANGCHAIN.git</span>
+<span class="cmd">cd AI-SDK-LANGCHAIN</span>
+
+<span class="comment"># Install frontend dependencies</span>
+<span class="cmd">cd frontend && npm install && npm run dev</span>
+
+<span class="comment"># Install backend dependencies</span>
+<span class="cmd">cd backend && pip install -r requirements.txt && python main.py</span>
+
+<span class="comment"># Each project follows the same structure</span>
+<span class="comment"># frontend/  → Web application</span>
+<span class="comment"># backend/   → API server</span>
+<span class="comment"># README.md  → Project documentation</span>
+    </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
     <div class="big">AI-SDK ECOSYSTEM</div>
-    <p>Master Blueprint — 2026 Edition</p>
-    <p style="margin-top:0.5rem;">10 Projects · 10 AI Frameworks · 25+ API Providers · Full SaaS · Complete DevOps</p>
-    <p style="margin-top:1rem;color:#ff4d6d;">⚠️ Each repository is independent. No cross-repo dependencies.</p>
+    <p>Master Showcase — 2026 Edition</p>
+    <p style="margin-top:0.75rem;">
+        <a href="https://github.com/mk-knight23/AI-SDK-ECOSYSTEM" style="color:var(--accent3);text-decoration:none;" target="_blank" rel="noopener">
+            View on GitHub →
+        </a>
+    </p>
+    <p style="margin-top:2rem;font-size:0.75rem;">
+        10 Projects · 10 AI Frameworks · 25+ API Providers · Full SaaS · Complete DevOps
+    </p>
+    <p style="margin-top:1rem;color:#ff4d6d;font-size:0.7rem;">
+        ⚠️ Each repository is independent. No cross-repo dependencies.
+    </p>
 </footer>
 
 </body>
