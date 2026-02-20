@@ -25,3 +25,14 @@ vite.config.ts.timestamp-*
 # Logs
 logs/
 *.log
+# AI-SDK Repositories (independent, not part of this repo)
+AI-SDK-ANTHROPIC/
+AI-SDK-AUTOGEN/
+AI-SDK-CREWAI/
+AI-SDK-HAYSTACK/
+AI-SDK-LAMA-INDEX/
+AI-SDK-LANGCHAIN/
+AI-SDK-LANGGRAPH/
+AI-SDK-OPENAI/
+AI-SDK-SEMANTIC-KERNEL/
+AI-SDK-VERCEL-AI/
