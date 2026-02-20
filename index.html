@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-SDK ECOSYSTEM | 10 Production-Ready AI Framework Stacks</title>
+    <meta name="description" content="Showcase of 10 production-ready AI SDK framework implementations">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-card: #1f1f1f;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #3b82f6;
+            --border: #27272a;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        header { padding: 80px 0 60px; text-align: center; }
+        h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 800; background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.25rem; color: var(--text-secondary); margin: 0 auto 32px; }
+        .stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+        .stat-value { font-size: 2rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.875rem; color: var(--text-secondary); }
+        main { padding: 40px 0 80px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 16px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .card-framework { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 16px; }
+        .card-desc { font-size: 0.9375rem; color: var(--text-secondary); margin-bottom: 24px; }
+        .card-stats { display: flex; gap: 16px; margin-bottom: 20px; font-size: 0.875rem; }
+        .btn { display: block; width: 100%; padding: 12px 24px; background: var(--accent); color: white; border: none; border-radius: 10px; font-weight: 600; text-align: center; text-decoration: none; }
+        .btn:hover { background: #2563eb; }
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border); color: var(--text-secondary); }
+        footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 768px) { header { padding: 40px 0 32px; } .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI-SDK ECOSYSTEM</h1>
+            <p class="subtitle">10 Production-Ready AI Framework Stacks</p>
+            <div class="stats">
+                <div class="stat"><div class="stat-value">10</div><div class="stat-label">SDK Repositories</div></div>
+                <div class="stat"><div class="stat-value">10</div><div class="stat-label">AI Frameworks</div></div>
+                <div class="stat"><div class="stat-value" id="total-stars">-</div><div class="stat-label">Total Stars</div></div>
+            </div>
+        </div>
+    </header>
+    <main><div class="container"><div class="grid" id="repo-grid"></div></div></main>
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ by <a href="https://github.com/mk-knight23">mk-knight23</a></p>
+        </div>
+    </footer>
+    <script>
+        const repos = [
+            { name: 'AI-SDK-LANGCHAIN', icon: '🦜', framework: 'LangChain Framework', desc: 'Production-ready LangChain with Next.js + FastAPI' },
+            { name: 'AI-SDK-CREWAI', icon: '👥', framework: 'CrewAI Agents', desc: 'Multi-agent orchestration with React 19 + FastAPI' },
+            { name: 'AI-SDK-LANGGRAPH', icon: '🕸️', framework: 'LangGraph', desc: 'Stateful agents with SvelteKit + Node.js' },
+            { name: 'AI-SDK-AUTOGEN', icon: '🤖', framework: 'Microsoft AutoGen', desc: 'Multi-agent framework with Vue 3 + .NET 9' },
+            { name: 'AI-SDK-OPENAI', icon: '🟢', framework: 'OpenAI SDK', desc: 'Assistants API with Angular 19 + Go' },
+            { name: 'AI-SDK-VERCEL-AI', icon: '▲', framework: 'Vercel AI SDK', desc: 'React/Next.js AI integration' },
+            { name: 'AI-SDK-ANTHROPIC', icon: '🧠', framework: 'Anthropic Claude', desc: 'Claude API with Remix + FastAPI' },
+            { name: 'AI-SDK-HAYSTACK', icon: '🌾', framework: 'Haystack', desc: 'Deepset NLP with Nuxt 3 + Django' },
+            { name: 'AI-SDK-SEMANTIC-KERNEL', icon: '🎯', framework: 'Semantic Kernel', desc: 'Microsoft AI with Astro 5 + Flask' },
+            { name: 'AI-SDK-LAMA-INDEX', icon: '🦙', framework: 'LlamaIndex', desc: 'Data framework with T3 Stack + FastAPI' }
+        ];
+        async function fetchStats(repo) {
+            try {
+                const r = await fetch(`https://api.github.com/repos/mk-knight23/${repo.name}`);
+                if (!r.ok) return { stars: '-', updated: 'N/A' };
+                const d = await r.json();
+                return { stars: d.stargazers_count?.toLocaleString() || '-', updated: new Date(d.updated_at).toLocaleDateString('en-US', {month:'short',day:'numeric'}) };
+            } catch { return { stars: '-', updated: 'N/A' }; }
+        }
+        async function render() {
+            const grid = document.getElementById('repo-grid');
+            let total = 0;
+            const cards = await Promise.all(repos.map(async (repo) => {
+                const s = await fetchStats(repo);
+                if (s.stars !== '-') total += parseInt(s.stars.replace(/,/g, '')) || 0;
+                return `<div class="card"><div class="card-icon">${repo.icon}</div><h2 class="card-title">${repo.framework}</h2><p class="card-framework">${repo.name}</p><p class="card-desc">${repo.desc}</p><div class="card-stats"><span>⭐ ${s.stars} stars</span><span>🟢 ${s.updated}</span></div><a href="https://github.com/mk-knight23/${repo.name}" class="btn" target="_blank">View on GitHub →</a></div>`;
+            }));
+            grid.innerHTML = cards.join('');
+            document.getElementById('total-stars').textContent = total.toLocaleString();
+        }
+        render();
+    </script>
+</body>
+</html>
