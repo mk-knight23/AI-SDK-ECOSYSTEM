@@ -1,0 +1,111 @@
+{
+  "name": "ai-sdk-validation-team",
+  "description": "Multi-project validation and documentation team for 10 AI SDK projects",
+  "members": [
+    {
+      "name": "team-lead",
+      "agentType": "general-purpose",
+      "role": "coordination"
+    },
+    {
+      "name": "validation-coordinator",
+      "agentType": "general-purpose",
+      "role": "phase-1"
+    },
+    {
+      "name": "langchain-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "crewai-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "langgraph-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "autogen-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "openai-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "vercel-ai-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "anthropic-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "haystack-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "semantic-kernel-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "lamaindex-validator",
+      "agentType": "everything-claude-code:e2e-runner",
+      "role": "validator"
+    },
+    {
+      "name": "fix-coordinator",
+      "agentType": "everything-claude-code:build-error-resolver",
+      "role": "phase-2"
+    },
+    {
+      "name": "python-fixer-1",
+      "agentType": "everything-claude-code:python-reviewer",
+      "role": "fixer"
+    },
+    {
+      "name": "python-fixer-2",
+      "agentType": "everything-claude-code:python-reviewer",
+      "role": "fixer"
+    },
+    {
+      "name": "multilang-fixer",
+      "agentType": "everything-claude-code:build-error-resolver",
+      "role": "fixer"
+    },
+    {
+      "name": "doc-coordinator",
+      "agentType": "everything-claude-code:doc-updater",
+      "role": "phase-3"
+    },
+    {
+      "name": "doc-writer-1",
+      "agentType": "octo:docs-architect",
+      "role": "writer"
+    },
+    {
+      "name": "doc-writer-2",
+      "agentType": "octo:docs-architect",
+      "role": "writer"
+    },
+    {
+      "name": "doc-writer-3",
+      "agentType": "octo:docs-architect",
+      "role": "writer"
+    },
+    {
+      "name": "qa-specialist",
+      "agentType": "pr-review-toolkit:code-reviewer",
+      "role": "phase-4"
+    }
+  ]
+}
