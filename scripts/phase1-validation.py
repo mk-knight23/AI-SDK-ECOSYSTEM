@@ -10,14 +10,19 @@ import sys
 import json
 import subprocess
 import datetime
+import logging
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Tuple
 
-# Configuration
-BASE_DIR = "/Users/mkazi/AI-SDK-PROJECTS"
+# Configuration - make BASE_DIR configurable
+BASE_DIR = os.environ.get("PROJECT_ROOT", "/Users/mkazi/AI-SDK-PROJECTS")
 RESULTS_DIR = os.path.join(BASE_DIR, "validation-results")
 TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+# Health threshold constants
+HEALTH_THRESHOLD_GOOD = 70
+HEALTH_THRESHOLD_WARNING = 40
 
 # Project configurations
 PROJECTS = {
@@ -32,6 +37,13 @@ PROJECTS = {
     "AI-SDK-SEMANTIC-KERNEL": "semantic-kernel",
     "AI-SDK-LAMA-INDEX": "lamaindex",
 }
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # ANSI color codes
 class Colors:
@@ -89,7 +101,7 @@ def validate_project(project_dir: str, project_name: str) -> Dict:
         })
         return result
 
-    os.chdir(full_path)
+    # Thread-safe: Use absolute paths instead of os.chdir()
 
     # Test 1: Backend dependencies
     print(f"{Colors.YELLOW}  [1/8] Checking backend dependencies...{Colors.NC}")
@@ -165,8 +177,8 @@ def validate_project(project_dir: str, project_name: str) -> Dict:
                         if any(keyword in content.lower() for keyword in ['ai_sdk', 'langchain', 'anthropic', 'openai', 'crewai', 'autogen']):
                             ai_sdk_found = True
                             break
-                except:
-                    pass
+                except Exception as e:
+                    logger.warning(f"Failed to read file {filepath}: {e}")
         if ai_sdk_found:
             break
 
@@ -216,20 +228,35 @@ def validate_project(project_dir: str, project_name: str) -> Dict:
         "health_percentage": health
     }
 
-    health_color = Colors.GREEN if health >= 70 else Colors.YELLOW if health >= 40 else Colors.RED
+    health_color = Colors.GREEN if health >= HEALTH_THRESHOLD_GOOD else Colors.YELLOW if health >= HEALTH_THRESHOLD_WARNING else Colors.RED
     print(f"    {health_color}Health: {health:.0f}% ({passes}/{total} tests passed){Colors.NC}")
     print()
 
     return result
 
+def count_issues_by_severity(results: List[Dict]) -> Tuple[int, int, int, int]:
+    """
+    Count issues by severity level.
+
+    Returns:
+        Tuple of (critical, high, medium, low) counts
+    """
+    severity_counts = {"Critical": 0, "High": 0, "Medium": 0, "Low": 0}
+
+    for result in results:
+        for issue in result.get('issues', []):
+            severity = issue.get('severity', 'Low')
+            if severity in severity_counts:
+                severity_counts[severity] += 1
+
+    return (severity_counts["Critical"], severity_counts["High"],
+            severity_counts["Medium"], severity_counts["Low"])
+
 def generate_report(results: List[Dict], report_file: str):
     """Generate markdown validation report"""
 
-    # Calculate totals
-    total_critical = 0
-    total_high = 0
-    total_medium = 0
-    total_low = 0
+    # Count issues by severity using helper function
+    total_critical, total_high, total_medium, total_low = count_issues_by_severity(results)
 
     with open(report_file, 'w') as f:
         f.write(f"""# Phase 1 Validation Report
@@ -267,26 +294,14 @@ This report summarizes the validation results for all {len(results)} AI SDK proj
             issues_count = len(result.get('issues', []))
 
             # Health indicator
-            if health >= 70:
+            if health >= HEALTH_THRESHOLD_GOOD:
                 indicator = '🟢'
-            elif health >= 40:
+            elif health >= HEALTH_THRESHOLD_WARNING:
                 indicator = '🟡'
             else:
                 indicator = '🔴'
 
             f.write(f"| {result['project']} | {indicator} {health:.0f}% | {passed}/{total} | {failed} | {issues_count} |\n")
-
-            # Count issues
-            for issue in result.get('issues', []):
-                severity = issue.get('severity', 'Low')
-                if severity == 'Critical':
-                    total_critical += 1
-                elif severity == 'High':
-                    total_high += 1
-                elif severity == 'Medium':
-                    total_medium += 1
-                elif severity == 'Low':
-                    total_low += 1
 
         # Write Critical Issues
         f.write(f"\n## Issues by Severity\n\n### Critical Issues ({total_critical})\n")
@@ -355,6 +370,7 @@ def main():
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
     # Run validation for all projects in parallel
+    logger.info(f"Starting parallel validation of all projects in {BASE_DIR}")
     print("Starting parallel validation of all projects...")
     print()
 
@@ -378,6 +394,7 @@ def main():
                 with open(json_file, 'w') as f:
                     json.dump(result, f, indent=2)
             except Exception as exc:
+                logger.error(f"Error validating {project_name}: {exc}")
                 print(f"{Colors.RED}ERROR validating {project_name}: {exc}{Colors.NC}")
 
     print()
