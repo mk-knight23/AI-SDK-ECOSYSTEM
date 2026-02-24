@@ -1,0 +1,38 @@
+{
+  "project": "vercel-ai",
+  "directory": "AI-SDK-VERCEL-AI",
+  "timestamp": "2026-02-24T17:12:47.017011",
+  "tests": {
+    "backend_install": "skipped",
+    "frontend_install": "pass",
+    "backend_start": "fail",
+    "frontend_start": "fail",
+    "health_check": "pass",
+    "ai_sdk_test": "fail",
+    "streaming_test": "fail",
+    "integration_test": "29%"
+  },
+  "issues": [
+    {
+      "severity": "Critical",
+      "category": "Backend",
+      "message": "No backend entry point (main.py, app.py, or server.py) found"
+    },
+    {
+      "severity": "Critical",
+      "category": "Integration",
+      "message": "No AI SDK integration code detected"
+    },
+    {
+      "severity": "High",
+      "category": "Configuration",
+      "message": "No .env.example or .env file found"
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "passed": 2,
+    "failed": 4,
+    "health_percentage": 28.57142857142857
+  }
+}

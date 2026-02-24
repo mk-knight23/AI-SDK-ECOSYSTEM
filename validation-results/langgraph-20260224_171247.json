@@ -1,0 +1,33 @@
+{
+  "project": "langgraph",
+  "directory": "AI-SDK-LANGGRAPH",
+  "timestamp": "2026-02-24T17:12:47.014250",
+  "tests": {
+    "backend_install": "skipped",
+    "frontend_install": "pass",
+    "backend_start": "fail",
+    "frontend_start": "pass",
+    "health_check": "pass",
+    "ai_sdk_test": "fail",
+    "streaming_test": "pass",
+    "integration_test": "57%"
+  },
+  "issues": [
+    {
+      "severity": "Critical",
+      "category": "Backend",
+      "message": "No backend entry point (main.py, app.py, or server.py) found"
+    },
+    {
+      "severity": "Critical",
+      "category": "Integration",
+      "message": "No AI SDK integration code detected"
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "passed": 4,
+    "failed": 2,
+    "health_percentage": 57.14285714285714
+  }
+}

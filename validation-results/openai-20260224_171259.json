@@ -1,0 +1,38 @@
+{
+  "project": "openai",
+  "directory": "AI-SDK-OPENAI",
+  "timestamp": "2026-02-24T17:12:59.541098",
+  "tests": {
+    "backend_install": "skipped",
+    "frontend_install": "skipped",
+    "backend_start": "fail",
+    "frontend_start": "fail",
+    "health_check": "pass",
+    "ai_sdk_test": "fail",
+    "streaming_test": "fail",
+    "integration_test": "14%"
+  },
+  "issues": [
+    {
+      "severity": "Critical",
+      "category": "Backend",
+      "message": "No backend entry point (main.py, app.py, or server.py) found"
+    },
+    {
+      "severity": "Critical",
+      "category": "Integration",
+      "message": "No AI SDK integration code detected"
+    },
+    {
+      "severity": "High",
+      "category": "Configuration",
+      "message": "No .env.example or .env file found"
+    }
+  ],
+  "summary": {
+    "total_tests": 7,
+    "passed": 1,
+    "failed": 4,
+    "health_percentage": 14.285714285714285
+  }
+}
