@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kazi-agents-<adapter>
+  labels:
+    app: kazi-agents-<adapter>
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kazi-agents-<adapter>
+  template:
+    metadata:
+      labels:
+        app: kazi-agents-<adapter>
+    spec:
+      containers:
+      - name: app
+        image: ghcr.io/<org>/kazi-agents-<adapter>:<tag>
+        ports:
+        - containerPort: 8000
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: kazi-agents-secrets
+              key: OPENAI_API_KEY
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: kazi-agents-secrets
+              key: ANTHROPIC_API_KEY
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kazi-agents-<adapter>
+spec:
+  selector:
+    app: kazi-agents-<adapter>
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  type: ClusterIP

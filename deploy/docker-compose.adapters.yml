@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  langgraph:
+    build: ../implementations/langgraph
+    ports: ["8101:8000"]
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    env_file:
+      - ../implementations/langgraph/.env.example
+
+  openai_agents:
+    build: ../implementations/openai_agents
+    ports: ["8102:8000"]
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    env_file:
+      - ../implementations/openai_agents/.env.example
+
+  langchain:
+    build: ../implementations/langchain
+    ports: ["8103:8000"]
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+
+  anthropic:
+    build: ../implementations/anthropic
+    ports: ["8104:8000"]
+    command: uvicorn api:app --host 0.0.0.0 --port 8000

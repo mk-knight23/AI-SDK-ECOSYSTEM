@@ -1,0 +1,13 @@
+{
+  "name": "AI-SDK-ECOSYSTEM",
+  "title": "AI SDK Ecosystem Control Plane",
+  "description": "Unified control plane for all Kazi framework adapters and deployment automation",
+  "topics": [
+    "ecosystem",
+    "ai-platform",
+    "orchestration",
+    "ci-cd",
+    "deployment"
+  ],
+  "homepage": "https://mk-knight23.github.io/AI-SDK-ECOSYSTEM"
+}

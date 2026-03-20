@@ -1,0 +1,46 @@
+name: agents-army-ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  python-adapters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Python implementation tree
+        run: python -m compileall implementations
+
+      - name: Run adapter smoke checks
+        run: ./scripts/smoke_python_adapters.sh
+
+      - name: Run ecosystem smoke checks
+        run: ./scripts/smoke_ecosystem.sh
+
+  vercel-ai-adapter:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: implementations/vercel_ai
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build

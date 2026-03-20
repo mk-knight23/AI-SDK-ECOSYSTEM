@@ -1,0 +1,71 @@
+name: adapters-deploy-manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      adapter:
+        description: "Adapter name"
+        required: true
+        type: choice
+        options:
+          - langchain
+          - langgraph
+          - llamaindex
+          - openai_agents
+          - anthropic
+          - autogen
+          - crewai
+          - haystack
+          - semantic_kernel
+      environment:
+        description: "Target environment"
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      image_tag:
+        description: "Container tag (e.g., sha-xxxx or latest)"
+        required: true
+        default: latest
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: "latest"
+
+      - name: Validate required secrets
+        run: |
+          test -n "${{ secrets.DEPLOY_KUBECONFIG_B64 }}"
+          test -n "${{ secrets.OPENAI_API_KEY }}"
+          test -n "${{ secrets.ANTHROPIC_API_KEY }}"
+
+      - name: Prepare kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.DEPLOY_KUBECONFIG_B64 }}" | base64 -d > ~/.kube/config
+
+      - name: Render and apply manifest
+        env:
+          ADAPTER: ${{ github.event.inputs.adapter }}
+          IMAGE_TAG: ${{ github.event.inputs.image_tag }}
+          NAMESPACE: ${{ github.event.inputs.environment }}
+        run: |
+          TEMPLATE=deploy/k8s-adapter-template.yaml
+          OUT=/tmp/kazi-${ADAPTER}.yaml
+          sed "s#<adapter>#${ADAPTER}#g; s#<org>#${{ github.repository_owner }}#g; s#<tag>#${IMAGE_TAG}#g" "$TEMPLATE" > "$OUT"
+          kubectl get ns "$NAMESPACE" >/dev/null 2>&1 || kubectl create ns "$NAMESPACE"
+          kubectl apply -n "$NAMESPACE" -f "$OUT"
+
+      - name: Rollout status
+        env:
+          ADAPTER: ${{ github.event.inputs.adapter }}
+          NAMESPACE: ${{ github.event.inputs.environment }}
+        run: |
+          kubectl rollout status deploy/kazi-agents-${ADAPTER} -n "$NAMESPACE" --timeout=180s
