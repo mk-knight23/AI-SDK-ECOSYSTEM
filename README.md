@@ -2,45 +2,46 @@
 
 Unified control plane for Kazi's AI SDK adapter fleet.
 
-## What this ecosystem implements
+## Current Features
 
-The ecosystem turns a mission into a routed execution plan, then delegates that mission to the right adapter: OpenAI Agents, Vercel AI SDK, LangGraph, LangChain, LlamaIndex, Haystack, CrewAI, AutoGen, Semantic Kernel, and Anthropic.
+- Shared Agents Army registry with ZEUS, ATLAS, SENTINEL, FORGE, NEXUS, PIXEL, PULSE, TITAN, HERMES, and ORACLE.
+- Mission planning with primary/support agent routing and skill focus.
+- `ecosystem_runner.py` for running one adapter or the whole local fleet.
+- Deployment specs, secret checklist, Kubernetes template, Docker Compose file, and rollout runbook.
+- Smoke scripts for Python adapters and ecosystem routes.
+- GitHub Actions workflows for CI, adapter image build/push, and manual deploy.
+- Portfolio metadata and a lightweight GitHub Pages card.
 
-## Adapter fleet
+## Adapter Feature Inventory
 
-| Repository | SDK | Primary skills |
+| Repository | SDK | Current implemented feature |
 | --- | --- | --- |
-| AI-SDK-ANTHROPIC | Anthropic | Claude API operations, policy design |
-| AI-SDK-AUTOGEN | AutoGen | multi-agent conversation design, handoff protocols |
-| AI-SDK-CREWAI | CrewAI | role design, task decomposition |
-| AI-SDK-HAYSTACK | Haystack | retrieval pipelines, document stores |
-| AI-SDK-LAMA-INDEX | LlamaIndex | RAG ingestion, index design |
-| AI-SDK-LANGCHAIN | LangChain | chain composition, tool calling |
-| AI-SDK-LANGGRAPH | LangGraph | state machines, durable execution |
-| AI-SDK-OPENAI | OpenAI Agents | OpenAI Agents SDK, tool calling |
-| AI-SDK-SEMANTIC-KERNEL | Semantic Kernel | plugin architecture, enterprise copilots |
-| AI-SDK-VERCEL-AI | Vercel AI SDK | edge-native streaming, TypeScript agent UX |
+| AI-SDK-OPENAI | OpenAI Agents | Agent object creation with safety-oriented mission instructions |
+| AI-SDK-VERCEL-AI | Vercel AI SDK | Typed routing and streaming-ready prompt rendering |
+| AI-SDK-LANGGRAPH | LangGraph | StateGraph route/plan/verify flow |
+| AI-SDK-LANGCHAIN | LangChain | ChatPromptTemplate orchestration |
+| AI-SDK-LAMA-INDEX | LlamaIndex | Document indexing and query-engine path |
+| AI-SDK-HAYSTACK | Haystack | Pipeline initialization for retrieval workflows |
+| AI-SDK-CREWAI | CrewAI | Agent, Task, and Crew scaffold |
+| AI-SDK-AUTOGEN | AutoGen | AssistantAgent validation path |
+| AI-SDK-SEMANTIC-KERNEL | Semantic Kernel | Kernel initialization for plugin-first copilots |
+| AI-SDK-ANTHROPIC | Anthropic | Claude client initialization with policy-first positioning |
 
-## Shared skill architecture
+## Existing Runtime Flow
 
-- ZEUS: orchestration and lifecycle governance
-- ATLAS: full-stack implementation
-- SENTINEL: security and compliance
-- FORGE: deployment and operations
-- NEXUS: AI, RAG, and evaluation
-- PIXEL: UX and accessibility
-- PULSE: product and launch strategy
-- TITAN: testing and verification
-- HERMES: automation and integrations
-- ORACLE: research and strategy
+1. A mission enters the control plane.
+2. The shared router scores it against the Agents Army skill registry.
+3. The selected adapter receives a normalized mission contract.
+4. The adapter validates its SDK-specific execution path.
+5. CI, smoke scripts, and tests protect the contract before release.
 
-## Run the fleet
+## Run The Fleet
 
 ```bash
 python3 ecosystem_runner.py --mission "build secure AI workflow and deploy"
 ```
 
-Run one adapter:
+Run a single adapter:
 
 ```bash
 python3 ecosystem_runner.py --framework langgraph --mission "add durable workflow and evals"
@@ -52,6 +53,23 @@ python3 ecosystem_runner.py --framework langgraph --mission "add durable workflo
 python3 -m pytest
 ```
 
-## Portfolio story
+## Documentation Map
 
-This repo is the control-plane layer that shows the full AI engineering range: SDK fluency, architecture, orchestration, safety, testing, deployment planning, and product positioning.
+- `SKILLSET.md`: platform and framework skill coverage.
+- `DEPLOYMENT-MATRIX.md`: recommended deployment target by adapter.
+- `deploy/DEPLOY-SPEC.md`: deployment contract.
+- `deploy/FIRST-ROLLOUT-RUNBOOK.md`: first staging-to-production rollout path.
+- `deploy/SECRETS-CHECKLIST.md`: required secrets.
+- `docs/CURRENT_FEATURES.md`: concise inventory of implemented and future features.
+
+## Upgrade Roadmap
+
+- Add a benchmark/evaluation harness for quality, cost, and latency comparison.
+- Add adapter discovery instead of the static runner mapping.
+- Add live provider execution behind environment-scoped credentials.
+- Add centralized observability across all adapter runs.
+- Publish the ecosystem as the portfolio hub linking all SDK repos.
+
+## Clean Repository Policy
+
+Generated caches, local secrets, dependency folders, and build output are ignored. Source, docs, tests, deployment specs, and portfolio files are intentionally tracked.

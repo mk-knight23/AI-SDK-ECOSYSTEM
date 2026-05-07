@@ -1,19 +1,25 @@
-# Project Brain: ecosystem
+# Project Brain: AI-SDK-ECOSYSTEM
 
 ## Purpose
-Provide a unified launcher and comparison layer across all Kazi's Agents Army framework adapters.
 
-## Scope
-- Normalized mission schema
-- Framework adapter discovery
-- Environment validation per adapter
-- Consistent run and smoke-test interface
+Provide a unified launcher, documentation hub, and production roadmap across all Kazi AI SDK adapters.
 
 ## Current State
-- Shared routing core available in `implementations/core/agents_army_core`.
-- Framework-specific adapters created for 10 framework targets.
 
-## Next Build
-- Add a single CLI: `python ecosystem_runner.py --framework <name> --mission "..."`.
-- Add benchmark/eval harness for quality/cost/latency comparison.
-- Add deployment matrix and IaC stubs for each framework target.
+- Shared routing core is implemented.
+- Ecosystem runner can invoke sibling adapter runners.
+- Deployment matrix, rollout runbook, secret checklist, and smoke scripts exist.
+- Tests verify skill-aware mission routing.
+
+## Upgrade Direction
+
+- Add dynamic adapter discovery.
+- Add benchmark/eval harness for quality, cost, and latency.
+- Add live provider execution with strict secret handling.
+- Publish the ecosystem as the portfolio control-plane hub.
+
+## Quality Bar
+
+- Keep generated files and local secrets out of git.
+- Keep docs aligned with actual runtime behavior.
+- Keep tests green before every push.
