@@ -1,0 +1,9 @@
+[project]
+name = "ai_sdk_ecosystem"
+version = "0.2.0"
+description = "Kazi AI SDK ecosystem adapter"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

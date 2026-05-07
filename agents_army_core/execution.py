@@ -11,6 +11,7 @@ class MissionPlan:
     primary: str
     support: List[str]
     phases: List[str]
+    primary_skills: List[str]
 
 
 def build_mission_plan(request: MissionRequest) -> MissionPlan:
@@ -27,6 +28,7 @@ def build_mission_plan(request: MissionRequest) -> MissionPlan:
         primary=routed.primary.code,
         support=[a.code for a in routed.support],
         phases=phases,
+        primary_skills=routed.primary.required_skills,
     )
 
 
@@ -36,6 +38,7 @@ def render_system_instructions(plan: MissionPlan) -> str:
         f"Primary agent: {plan.primary}. "
         f"Support agents: {', '.join(plan.support)}. "
         f"Mission: {plan.mission}. "
+        f"Skill focus: {', '.join(plan.primary_skills)}. "
         f"Execution phases: {' -> '.join(plan.phases)}. "
         "Always produce evidence-backed outputs and include verification notes."
     )

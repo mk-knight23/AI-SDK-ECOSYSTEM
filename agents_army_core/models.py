@@ -9,6 +9,7 @@ class AgentSpec:
     domain: str
     invoke_keywords: List[str]
     objective: str
+    required_skills: List[str]
 
 
 @dataclass(frozen=True)
